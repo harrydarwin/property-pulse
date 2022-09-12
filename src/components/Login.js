@@ -6,7 +6,7 @@ import "./Login.css";
 
 
 
-function Login() {
+function Login({handleSetUser}) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [user, loading, error] = useAuthState(auth);
@@ -41,7 +41,7 @@ function Login() {
         >
           Login
         </button>
-        <button className="login__btn login__google" onClick={signInWithGoogle}>
+        <button className="login__btn login__google" onClick={() => signInWithGoogle(handleSetUser)}>
           Login with Google
         </button>
         <div>

@@ -35,12 +35,14 @@ const userDB = process.env.REACT_APP_USERS_DB;
 
 // sign IN with google function
 const googleProvider = new GoogleAuthProvider();
-const signInWithGoogle = async () => {
+const signInWithGoogle = async (fn) => {
+    let userObj = false;
   try {
     const res = await signInWithPopup(auth, googleProvider);
     const user = res.user;
     const q = query(collection(db, userDB), where("uid", "==", user.uid));
     const docs = await getDocs(q);
+    console.log(docs, docs.docs)
     if (docs.docs.length === 0) {
         console.log('NO OCS')
       await addDoc(collection(db, userDB), {
@@ -49,12 +51,32 @@ const signInWithGoogle = async () => {
         authProvider: "google",
         email: user.email,
       });
+        const q = query(collection(db, userDB), where("uid", "==", user.uid));
+        const docs = await getDocs(q);
+        userObj = docs.docs[0].data();
+
+    } else {
+        userObj = docs.docs[0].data();
+    }
+    if(fn){
+        fn(userObj);
     }
   } catch (err) {
     console.error(err);
     alert(err.message);
   }
 };
+
+const getUserData = async (userUuid) => {
+    const q = query(collection(db, userDB), where("uid", "==", userUuid));
+    const docs = await getDocs(q);
+    if(docs.docs.length > 0) {
+        return docs.docs[0].data();
+    } else {
+        console.log('Error no - user docs');
+    }
+
+}
 
 // sign IN with email + password
 const logInWithEmailAndPassword = async (email, password) => {
@@ -95,8 +117,12 @@ const sendPasswordReset = async (email) => {
 };
 
 // Logout function
-const logout = () => {
+const logout = (fn) => {
     signOut(auth);
+    if(fn){
+        fn();
+    }
+
 };
 
 
@@ -104,6 +130,7 @@ export {
     auth,
     db,
     userDB,
+    getUserData,
     signInWithGoogle,
     logInWithEmailAndPassword,
     registerWithEmailAndPassword,

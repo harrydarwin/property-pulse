@@ -20,6 +20,20 @@ header {
   background-color: #A8DADC;
 }
 
+.login-box {
+  cursor: pointer;
+}
+
+.nav-dropdown {
+  border-radius: 0 0 3.75px 3.75px;
+  position: absolute;
+  inset: 2px auto auto 0px;
+  margin: 0px;
+  transform: translate(0px, 47px);
+  border: none;
+  background-color: #A8DADC;
+}
+
 .user-image {
   background-color: #2A324B;
   height: 45px;
@@ -58,7 +72,27 @@ header {
   transform: translate(-50%, -50%);
 }
 
+.shake-me {
+  animation: shake 5s;
+}
 
+@keyframes shake {
+  10%, 90% {
+    transform: translate(-52%, -50%);
+  }
+
+  20%, 80% {
+    transform: translate(-48%, -50%);
+  }
+
+  30%, 50%, 70% {
+    transform: translate(-54%, -50%);
+  }
+
+  40%, 60% {
+    transform: translate(-46%, -50%);
+  }
+}
 
 @keyframes App-logo-spin {
   from {
