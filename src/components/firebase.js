@@ -15,7 +15,10 @@ import {
   collection,
   where,
   addDoc,
+  doc,
+  updateDoc
 } from "firebase/firestore";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDd1KTHQL3TNA256ypD2sk8_sZiXg68xec",
@@ -31,6 +34,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
+const storage = getStorage();
 const userDB = process.env.REACT_APP_USERS_DB;
 
 // sign IN with google function
@@ -50,10 +54,12 @@ const signInWithGoogle = async (fn) => {
         name: user.displayName,
         authProvider: "google",
         email: user.email,
+        userImage: null
       });
-        const q = query(collection(db, userDB), where("uid", "==", user.uid));
-        const docs = await getDocs(q);
-        userObj = docs.docs[0].data();
+      // WHEN NEW USER IS MADE - DASHBOARD IS LOOKING FOR USER DOCS - NEED TO set up loading plus get data from firebase or just set user state with this functtion? ----  make function in app.js to set user state to the user info above - fake it till next load????
+      const q = query(collection(db, userDB), where("uid", "==", user.uid));
+      const docs = await getDocs(q);
+      userObj = docs.docs[0].data();
 
     } else {
         userObj = docs.docs[0].data();
@@ -78,6 +84,13 @@ const getUserData = async (userUuid) => {
 
 }
 
+const updateUserImage = async (uid, url) => {
+  const userRef = doc(db, userDB, uid);
+  await updateDoc(userRef, {
+    userImage: url
+  });
+}
+
 // sign IN with email + password
 const logInWithEmailAndPassword = async (email, password) => {
     try {
@@ -98,6 +111,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
         name,
         authProvider: "local",
         email,
+        userImage: null
       });
     } catch (err) {
       console.error(err);
@@ -129,6 +143,11 @@ const logout = (fn) => {
 export {
     auth,
     db,
+    storage,
+    ref,
+    uploadBytesResumable,
+    getDownloadURL,
+    updateUserImage,
     userDB,
     getUserData,
     signInWithGoogle,

@@ -64,6 +64,10 @@ header {
   border-radius: 10px;
 }
 
+.container-full {
+  width: 100%;
+}
+
 .sign-up-card {
   margin: auto;
   position: absolute;

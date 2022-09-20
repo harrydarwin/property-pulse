@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Routes, Route, Link, Outlet } from "react-router-dom";
 import "./Dashboard.css";
 import { auth, db, userDB, logout } from "./firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
+import Sidebar from "./Sidebar";
 
 
 function Dashboard({getUser, updateCurrentUser}) {
@@ -31,9 +32,13 @@ function Dashboard({getUser, updateCurrentUser}) {
     fetchUserName();
   }, [user, loading]);
   return (
-    <div className="dashboard">
-
-
+    <div className="dashboard container">
+        <aside>
+          <Sidebar />
+        </aside>
+        <div className="dashboard-content-container flex-grow-1">
+          <Outlet />
+        </div>
 
        {/* <div className="dashboard__container">
         Logged in as

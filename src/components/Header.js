@@ -5,10 +5,10 @@ import { logout } from './firebase';
 
 
 function LogoutButton({updateCurrentUser}) {
-  return <li><button class="dropdown-item" type="button" onClick={() => logout(updateCurrentUser(false))}>Logout</button></li>;
+  return <li><button className="dropdown-item" type="button" onClick={() => logout(updateCurrentUser(false))}>Logout</button></li>;
 }
 function LoginButton() {
-    return <li><button class="dropdown-item" type="button" onClick={() => {
+    return <li><button className="dropdown-item" type="button" onClick={() => {
        const card = $('.card-container');
        console.log(card)
        card.addClass('shake-me');
@@ -39,9 +39,9 @@ const Header = ({userName, isUser, updateCurrentUser}) => {
                                 <div className="login-text me-2"><p className='mb-0'>{userName ? 'Hello, ' + userName : 'Login'}</p></div>
                                 <div className="user-image"><FontAwesomeIcon icon={faUserAstronaut} /></div>
                             </div>
-                            <ul class="dropdown-menu nav-dropdown w-100">
-                                <li><button class="dropdown-item" type="button">Action</button></li>
-                                <li><button class="dropdown-item" type="button">Another action</button></li>
+                            <ul className="dropdown-menu nav-dropdown w-100">
+                                <li><button className="dropdown-item" type="button">Action</button></li>
+                                <li><button className="dropdown-item" type="button">Another action</button></li>
                                 {logButton}
                             </ul>
                         </div>

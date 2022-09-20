@@ -5,6 +5,8 @@ import Login from './Login';
 import Register from './Register';
 import Reset from './Reset';
 import Dashboard from './Dashboard';
+import Clients from './Clients';
+import Profile from './Profile';
 import $ from 'jquery';
 import SignUpCard from './SignUpCard';
 
@@ -19,10 +21,9 @@ class App extends Component {
         currentUser: false,
     }
 
-    // componentDidMount() {
+    componentDidMount() {
 
-
-    // }
+    }
 
     // handleUserSignIn =() => {
     //     console.log(auth);
@@ -52,12 +53,12 @@ class App extends Component {
 
 
    render() {
-console.log()
+    // console.log(this.state, this.state.currentUser)
        return (
            <div id="appContainer">
             <Router>
                 <Header
-                    userName={this.state.currentUser.name ? this.state.currentUser.name : false}
+                    userName={this.state.currentUser != undefined && this.state.currentUser.name ? this.state.currentUser.name : false}
                     isUser={this.state.loggedIn}
                     updateCurrentUser={this.handleUpdateCurrentUser}
                 />
@@ -69,8 +70,10 @@ console.log()
                         <Route exact path="/reset" element={<Reset />} />
                         <Route exact path="/dashboard" element={<Dashboard
                             getUser={this.getUser}
-                            updateCurrentUser={this.handleUpdateCurrentUser}
-                        />} />
+                            updateCurrentUser={this.handleUpdateCurrentUser}/>}>
+                            <Route path="profile" element={<Profile currentUser={this.state.currentUser} />} />
+                            <Route path="clients" element={<Clients />} />
+                        </Route>
 
                     </Routes>
             </Router>
