@@ -1,0 +1,25 @@
+.profile-image {
+    margin: 10px 0;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+    min-height: 50%;
+    border: 5px solid #A8DADC;
+    border-radius: 10px;
+}
+
+.profile-image img {
+    border-radius: 5px;
+}
+
+.edit-profile__container.card-container {
+    height: auto;
+}
+
+#image-input + label {
+    cursor: pointer;
+}
+
+#image-input:disabled + label {
+    cursor: default;
+}

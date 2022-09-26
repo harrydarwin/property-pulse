@@ -16,9 +16,10 @@ import {
   where,
   addDoc,
   doc,
-  updateDoc
+  updateDoc,
+  onSnapshot
 } from "firebase/firestore";
-import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 
 const firebaseConfig = {
   apiKey: "AIzaSyDd1KTHQL3TNA256ypD2sk8_sZiXg68xec",
@@ -37,6 +38,13 @@ const db = getFirestore(app);
 const storage = getStorage();
 const userDB = process.env.REACT_APP_USERS_DB;
 
+// REALTIME UPDATES - to from userDB to currentUser state - MAY NOT NEED
+// const initWatchUserDb = (dataID) => {
+//   const toUpdate = onSnapshot(doc(db, userDB, dataID), (doc) => {
+//     console.log("Current data: ", doc.data());
+//   })
+// }
+
 // sign IN with google function
 const googleProvider = new GoogleAuthProvider();
 const signInWithGoogle = async (fn) => {
@@ -49,12 +57,17 @@ const signInWithGoogle = async (fn) => {
     console.log(docs, docs.docs)
     if (docs.docs.length === 0) {
         console.log('NO OCS')
-      await addDoc(collection(db, userDB), {
+      const docRef = await addDoc(collection(db, userDB), {
         uid: user.uid,
         name: user.displayName,
         authProvider: "google",
         email: user.email,
-        userImage: null
+        userImage: null,
+        dataID: null
+      });
+      // Set the data id so we can use it to access this users firebase database
+      await updateDoc(docRef, {
+        dataID: docRef.id
       });
       // WHEN NEW USER IS MADE - DASHBOARD IS LOOKING FOR USER DOCS - NEED TO set up loading plus get data from firebase or just set user state with this functtion? ----  make function in app.js to set user state to the user info above - fake it till next load????
       const q = query(collection(db, userDB), where("uid", "==", user.uid));
@@ -84,11 +97,13 @@ const getUserData = async (userUuid) => {
 
 }
 
-const updateUserImage = async (uid, url) => {
-  const userRef = doc(db, userDB, uid);
+
+const updateUserImage = async (dataID, url) => {
+  const userRef = doc(db, userDB, dataID);
   await updateDoc(userRef, {
     userImage: url
   });
+
 }
 
 // sign IN with email + password
@@ -106,12 +121,17 @@ const registerWithEmailAndPassword = async (name, email, password) => {
     try {
       const res = await createUserWithEmailAndPassword(auth, email, password);
       const user = res.user;
-      await addDoc(collection(db, userDB), {
+      const docRef = await addDoc(collection(db, userDB), {
         uid: user.uid,
         name,
         authProvider: "local",
         email,
-        userImage: null
+        userImage: null,
+        dataID: null
+      });
+      // Set the data id so we can use it to access this users firebase database
+      await updateDoc(docRef, {
+        dataID: docRef.id
       });
     } catch (err) {
       console.error(err);

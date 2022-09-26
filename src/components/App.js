@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { auth, getUserData, signInWithGoogle } from "./firebase";
+import { auth, getUserData, signInWithGoogle, updateUserImage } from "./firebase";
 import Login from './Login';
 import Register from './Register';
 import Reset from './Reset';
@@ -28,6 +28,22 @@ class App extends Component {
     // handleUserSignIn =() => {
     //     console.log(auth);
     // }
+
+    // handleUpdateUserState = (updateValue, callback) => {
+    //     if(callback){
+    //         callback();
+    //     }
+    //     this.setState({
+    //         : updateValue
+    //     })
+    // }
+// function to update both the user firebase DB AND update currentUsers user image in state
+    handleUserProfileImage = (dataID, url, callback) => {
+        updateUserImage(dataID, url);
+        this.setState(prevState => ({
+            currentUser: { ...prevState.currentUser, userImage: url }
+        }))
+    }
 
     getUser = (user) => {
         console.log(user, user.uid)
@@ -71,7 +87,10 @@ class App extends Component {
                         <Route exact path="/dashboard" element={<Dashboard
                             getUser={this.getUser}
                             updateCurrentUser={this.handleUpdateCurrentUser}/>}>
-                            <Route path="profile" element={<Profile currentUser={this.state.currentUser} />} />
+                            <Route path="profile" element={<Profile
+                                currentUser={this.state.currentUser}
+                                updateUserProfileImage={this.handleUserProfileImage}
+                            />} />
                             <Route path="clients" element={<Clients />} />
                         </Route>
 
