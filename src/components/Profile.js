@@ -3,7 +3,7 @@ import { storage, ref, uploadBytesResumable, getDownloadURL, updateUserImage } f
 import $ from 'jquery';
 import "./Profile.css";
 
-export default function Profile({ currentUser, updateUserProfileImage }) {
+export default function Profile({ currentUser, updateUserProfileImage, updateUserProfileInfo }) {
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -11,7 +11,7 @@ export default function Profile({ currentUser, updateUserProfileImage }) {
     const [imageAsFile, setImageAsFile] = useState('');
     const [imageAsUrl, setImageAsUrl] = useState(allInputs);
     const [imageEvent, setImageEvent] = useState('');
-    const [editMode, setEditMode] = useState(true);
+    const [editMode, setEditMode] = useState(false);
 
 
 
@@ -28,6 +28,14 @@ export default function Profile({ currentUser, updateUserProfileImage }) {
         setImageAsFile(imageFile => (image))
     }
 
+    // updates database And state THEN resets input-bound-variables (empties inputs) + turns off edit mode
+    const handleUserProfileUpdate = () => {
+        updateUserProfileInfo(currentUser.dataID, name);
+        setName('');
+
+        setEditMode(false);
+    }
+
 
     const handleFirebaseUpload = e => {
         if(e){
@@ -41,7 +49,7 @@ export default function Profile({ currentUser, updateUserProfileImage }) {
             // check if no image
             if (imageAsFile === '') {
                 const $btn = $(e.target);
-                $btn.parents('form').append('<p id="error-image-format" class="ml-2 mb-0 error-tag">Sorry, please try another image or format.</p>');
+                $btn.append('<p id="error-image-format" class="ml-2 mb-0 error-tag">Sorry, please try another image or format.</p>');
                 console.error(`not an image, the image file is a ${typeof (imageAsFile)}`)
             }
             const metadata = {
@@ -97,11 +105,13 @@ export default function Profile({ currentUser, updateUserProfileImage }) {
 
     }
 
-    console.log(currentUser)
     useEffect(() => {
-        console.log(imageAsFile);
         handleFirebaseUpload(imageEvent);
     }, [imageAsFile]);
+
+    useEffect(() => {
+
+    })
     return (
         <>
             <div className="tab-title-submenu d-flex justify-content-between align-items-center mx-5">
@@ -113,7 +123,7 @@ export default function Profile({ currentUser, updateUserProfileImage }) {
                 </ul>
             </div>
             <div className="edit-profile container h-100">
-                <div className="edit-profile__container container card-container container-full p-4 row">
+                <div className="card-container-full container card-container container-full p-4 row">
                     <div className="d-flex flex-column col-12 col-md-6">
                         <form className="" onSubmit={handleFirebaseUpload}>
                             <input
@@ -151,8 +161,8 @@ export default function Profile({ currentUser, updateUserProfileImage }) {
                             disabled={!editMode}
                         />
                         <button
-                            className={editMode ? 'login__btn' : 'd-none'}
-                        //   onClick={() => signInWithEmailAndPassword(email, password)}
+                            className={editMode && name != '' ? 'login__btn' : 'd-none'}
+                            onClick={handleUserProfileUpdate}
                         >
                             Save changes
                         </button>

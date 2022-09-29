@@ -4,3 +4,7 @@
     height: 75%;
     border-right: 1px solid #ccc;
 }
+
+.sidebar-item {
+    margin-bottom: 5px;
+}

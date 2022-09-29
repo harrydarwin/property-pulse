@@ -63,7 +63,8 @@ const signInWithGoogle = async (fn) => {
         authProvider: "google",
         email: user.email,
         userImage: null,
-        dataID: null
+        dataID: null,
+        clients: []
       });
       // Set the data id so we can use it to access this users firebase database
       await updateDoc(docRef, {
@@ -106,6 +107,16 @@ const updateUserImage = async (dataID, url) => {
 
 }
 
+// updates user profile info in DB - ADD ANY MORE PROFILE INPUTS HERE OR CHANGEABLE DATA
+const updateUserProfile = async (dataID, name) => {
+  const userRef = doc(db, userDB, dataID);
+  await updateDoc(userRef, {
+    name: name,
+    // email: email
+  });
+
+}
+
 // sign IN with email + password
 const logInWithEmailAndPassword = async (email, password) => {
     try {
@@ -127,7 +138,8 @@ const registerWithEmailAndPassword = async (name, email, password) => {
         authProvider: "local",
         email,
         userImage: null,
-        dataID: null
+        dataID: null,
+        clients: []
       });
       // Set the data id so we can use it to access this users firebase database
       await updateDoc(docRef, {
@@ -168,6 +180,7 @@ export {
     uploadBytesResumable,
     getDownloadURL,
     updateUserImage,
+    updateUserProfile,
     userDB,
     getUserData,
     signInWithGoogle,
