@@ -12,6 +12,7 @@ import SignUpCard from './SignUpCard';
 
 import '../App.css';
 import Header from './Header';
+import AddClientForm from './AddClientForm';
 
 
 class App extends Component {
@@ -91,15 +92,25 @@ class App extends Component {
                         />} />
                         <Route exact path="/register" element={<Register />} />
                         <Route exact path="/reset" element={<Reset />} />
-                        <Route exact path="/dashboard" element={<Dashboard
-                            getUser={this.getUser}
-                            updateCurrentUser={this.handleUpdateCurrentUser}/>}>
-                            <Route path="profile" element={<Profile
+                        <Route exact path="/dashboard" element={
+                            <Dashboard
+                                getUser={this.getUser}
+                                updateCurrentUser={this.handleUpdateCurrentUser}
+                            />
+                        }>
+                        <Route path="profile" element={
+                            <Profile
                                 currentUser={this.state.currentUser}
                                 updateUserProfileImage={this.handleUserProfileImage}
                                 updateUserProfileInfo={this.handleUserProfileUpdate}
-                            />} />
-                            <Route path="clients" element={<Clients />} />
+                        />} />
+                        <Route path="clients" element={
+                            <Clients
+                                currentUser={this.state.currentUser}
+                        />} />
+                        <Route path="clients/addclientform" element={
+                            <AddClientForm
+                        />} />
                         </Route>
 
                     </Routes>

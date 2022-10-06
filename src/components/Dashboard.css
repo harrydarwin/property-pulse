@@ -11,6 +11,7 @@
     text-align: center;
     background-color: #dcdcdc;
     padding: 30px;
+    max-width: calc(100% - 77.27px);
   }
   .dashboard__btn {
     padding: 10px;

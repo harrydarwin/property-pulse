@@ -1,7 +1,7 @@
 .profile-image {
     margin: 10px 0;
     height: auto;
-    max-width: 100%;
+    max-width: 30%;
     vertical-align: middle;
     min-height: 50%;
     border: 5px solid #A8DADC;
@@ -22,4 +22,22 @@
 
 #image-input:disabled + label {
     cursor: default;
+}
+
+#image-input:disabled + label .profile-image {
+    border-color: rgba(118, 118, 118, 0.3);
+}
+
+input {
+    border: 2px solid #A8DADC;
+}
+
+input:disabled {
+    border: 1px solid rgba(118, 118, 118, 0.3);
+    outline: transparent;
+}
+
+input:focus-visible {
+    outline: none;
+    border-color: var(--dark-blue);
 }

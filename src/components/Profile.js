@@ -57,7 +57,7 @@ export default function Profile({ currentUser, updateUserProfileImage, updateUse
             };
 
             // Upload file and metadata to the object
-            const storageRef = ref(storage, `${currentUser.uid}/${imageAsFile}`);
+            const storageRef = ref(storage, `profileImages/${currentUser.uid}/${imageAsFile}`);
             const uploadTask = uploadBytesResumable(storageRef, imageAsFile, metadata);
 
             // Listen for state changes, errors, and completion of the upload.
@@ -109,9 +109,10 @@ export default function Profile({ currentUser, updateUserProfileImage, updateUse
         handleFirebaseUpload(imageEvent);
     }, [imageAsFile]);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-    })
+    // })
+    const placeholderImage = 'https://firebasestorage.googleapis.com/v0/b/propertypulse.appspot.com/o/Portrait_Placeholder.png?alt=media&token=d0107aa8-8474-4017-b6ca-cba008fbda7e';
     return (
         <>
             <div className="tab-title-submenu d-flex justify-content-between align-items-center mx-5">
@@ -135,7 +136,7 @@ export default function Profile({ currentUser, updateUserProfileImage, updateUse
                             />
                             <label htmlFor="image-input" className={editMode ? 'cursor-pointer' : ''}>
                                 <div className="profile-image">
-                                    <img src={currentUser.userImage} className="" alt="" />
+                                    <img src={currentUser.userImage ? currentUser.userImage : placeholderImage} className="" alt="" />
                                 </div>
                             </label>
                             <button id="upload-image" className="col-4 btn-primary d-none">
