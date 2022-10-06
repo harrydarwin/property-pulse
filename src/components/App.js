@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { auth, getUserData, signInWithGoogle, updateUserImage, updateUserProfile } from "./firebase";
+import { auth, getUserData, signInWithGoogle, updateUserImage, updateUserProfile, addNewClient } from "./firebase";
 import Login from './Login';
 import Register from './Register';
 import Reset from './Reset';
@@ -38,7 +38,7 @@ class App extends Component {
     //         : updateValue
     //     })
     // }
-// function to update both the user firebase DB AND update currentUsers user image in state
+    // function to update both the user firebase DB AND update currentUsers user image in state
     handleUserProfileImage = (dataID, url, callback) => {
         updateUserImage(dataID, url);
         this.setState(prevState => ({
@@ -50,6 +50,13 @@ class App extends Component {
         updateUserProfile(dataID, newName);
         this.setState(prevState => ({
             currentUser: { ...prevState.currentUser, name: newName }
+        }))
+    }
+
+    handleAddNewClient = (dataID, clientData) => {
+        addNewClient(dataID, clientData)
+        this.setState(prevState => ({
+            currentUser: { ...prevState.currentUser, clients: [...prevState.currentUser.clients, clientData] }
         }))
     }
 
@@ -76,16 +83,16 @@ class App extends Component {
 
 
 
-   render() {
-    // console.log(this.state, this.state.currentUser)
-       return (
-           <div id="appContainer">
-            <Router>
-                <Header
-                    userName={this.state.currentUser != undefined && this.state.currentUser.name ? this.state.currentUser.name : false}
-                    isUser={this.state.loggedIn}
-                    updateCurrentUser={this.handleUpdateCurrentUser}
-                />
+    render() {
+        // console.log(this.state, this.state.currentUser)
+        return (
+            <div id="appContainer">
+                <Router>
+                    <Header
+                        userName={this.state.currentUser != undefined && this.state.currentUser.name ? this.state.currentUser.name : false}
+                        isUser={this.state.loggedIn}
+                        updateCurrentUser={this.handleUpdateCurrentUser}
+                    />
                     <Routes>
                         <Route exact path="/" element={<Login
                             handleSetUser={this.handleUpdateCurrentUser}
@@ -98,26 +105,28 @@ class App extends Component {
                                 updateCurrentUser={this.handleUpdateCurrentUser}
                             />
                         }>
-                        <Route path="profile" element={
-                            <Profile
+                            <Route path="profile" element={
+                                <Profile
+                                    currentUser={this.state.currentUser}
+                                    updateUserProfileImage={this.handleUserProfileImage}
+                                    updateUserProfileInfo={this.handleUserProfileUpdate}
+                                />} />
+                            <Route path="clients" element={
+                                <Clients
+                                    currentUser={this.state.currentUser}
+                                />} />
+                            <Route path="clients/addclientform" element={
+                                <AddClientForm
                                 currentUser={this.state.currentUser}
-                                updateUserProfileImage={this.handleUserProfileImage}
-                                updateUserProfileInfo={this.handleUserProfileUpdate}
-                        />} />
-                        <Route path="clients" element={
-                            <Clients
-                                currentUser={this.state.currentUser}
-                        />} />
-                        <Route path="clients/addclientform" element={
-                            <AddClientForm
-                        />} />
+                                    addNewClient={this.handleAddNewClient}
+                                />} />
                         </Route>
 
                     </Routes>
-            </Router>
-              {/* <SignUpCard /> */}
-           </div>
-       )
-   }
+                </Router>
+                {/* <SignUpCard /> */}
+            </div>
+        )
+    }
 };
 export default App;

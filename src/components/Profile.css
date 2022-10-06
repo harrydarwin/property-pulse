@@ -2,6 +2,7 @@
     margin: 10px 0;
     height: auto;
     max-width: 30%;
+    min-width: 200px;
     vertical-align: middle;
     min-height: 50%;
     border: 5px solid #A8DADC;
@@ -29,7 +30,8 @@
 }
 
 input {
-    border: 2px solid #A8DADC;
+    border: 1px solid #8bbabb;
+    border-radius: 5px;
 }
 
 input:disabled {

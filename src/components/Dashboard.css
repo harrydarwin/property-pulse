@@ -25,3 +25,14 @@
     padding-top: 4rem;
     padding-left: 2rem;
   }
+
+  /* CLIENTS CSS */
+
+.client {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 3fr;
+}
+
+  .client-info {
+    width: fit-content;
+  }

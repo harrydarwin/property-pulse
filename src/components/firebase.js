@@ -17,7 +17,8 @@ import {
   addDoc,
   doc,
   updateDoc,
-  onSnapshot
+  onSnapshot,
+  arrayUnion
 } from "firebase/firestore";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject } from "firebase/storage";
 
@@ -117,6 +118,14 @@ const updateUserProfile = async (dataID, name) => {
 
 }
 
+// add new client to users firebase clients list
+const addNewClient = async (dataID, clientData) => {
+  const userRef = doc(db, userDB, dataID);
+  await updateDoc(userRef, {
+    clients: arrayUnion(clientData)
+  });
+}
+
 // sign IN with email + password
 const logInWithEmailAndPassword = async (email, password) => {
     try {
@@ -181,6 +190,7 @@ export {
     getDownloadURL,
     updateUserImage,
     updateUserProfile,
+    addNewClient,
     userDB,
     getUserData,
     signInWithGoogle,

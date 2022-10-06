@@ -12,28 +12,34 @@ function ClientList(currentClients) {
     if(currentClients.currentClients && currentClients.currentClients.length < 1){
         return <h3>You haven't added any clients yet. </h3>
     } else {
+        const clients = currentClients.currentClients;
         // Map currentClients.current clients into a client component
-        return <p>Hello!</p>
+        return <div className="client-list">
+            {/* Players list */}
+            {clients.map((client, index) =>
+                    <Client
+                        fname={client.fname}
+                        lname={client.lname}
+                        address={client.currentAddress}
+                        email={client.email}
+                        phone={client.phoneNumber}
+                        openQueries={client.openQueries}
+                        queries={client.queries}
+                        id={client.uid}
+                        key={client.uid}
+                        index={index}
+
+                        // changeScore={changeScore}
+                        // removePlayer={removePlayer}
+                    />
+                )}
+        </div>
     }
 }
 
 
 export default function Clients({currentUser}) {
 
-    // let cardToShow = <ClientList currentClients={currentUser.clients}/>;
-    // const [showAddForm, setShowAddForm] = useState(false);
-
-    // const toggleAddClientForm = (e) => {
-    //     e.preventDefault();
-    //     setShowAddForm(current => !current);
-    // }
-
-
-    // useEffect(() => {
-    //     if(showAddForm == true) {
-    //         cardToShow = <AddClientForm />
-    //     }
-    // }, [showAddForm])
     return (
     <>
             <div className="tab-title-submenu d-flex justify-content-between align-items-center mx-5">
@@ -41,7 +47,6 @@ export default function Clients({currentUser}) {
                 <ul className="submenu">
                     <li className="submenu-item">
                     <Link to="AddClientForm"><span className="me-1">Add client</span> <FontAwesomeIcon icon={faUserPlus} /></Link>
-                        {/* <a onClick={toggleAddClientForm} href=""><span className="me-1">Add client</span> <FontAwesomeIcon icon={faUserPlus} /></a> */}
                     </li>
                 </ul>
             </div>

@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 
-const AutoComplete = () => {
+const LocationSearchInput = ({classes, locationPlaceholder, updateClientAddress}) => {
  const autoCompleteRef = useRef();
  const inputRef = useRef();
  const options = {
@@ -15,14 +15,18 @@ const AutoComplete = () => {
   );
   autoCompleteRef.current.addListener("place_changed", async function () {
     const place = await autoCompleteRef.current.getPlace();
-    console.log({ place });
+    console.log(place);
+    updateClientAddress(place);
    });
  }, []);
  return (
-  <div>
-   <label>enter address :</label>
-   <input ref={inputRef} />
+  <div className={classes ? classes : ''}>
+    <input
+        className="login__textBox mb-0 w-100"
+        ref={inputRef}
+        placeholder={locationPlaceholder ? locationPlaceholder : 'Enter a location'}
+         />
   </div>
  );
 };
-export default AutoComplete;
+export default LocationSearchInput;
