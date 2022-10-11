@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { auth, getUserData, signInWithGoogle, updateUserImage, updateUserProfile, addNewClient, initWatchUserDb } from "./firebase";
+import { auth, getUserData, signInWithGoogle, updateUserImage, updateUserProfile, addNewClient, deleteClient, initWatchUserDb } from "./firebase";
 import Login from './Login';
 import Register from './Register';
 import Reset from './Reset';
@@ -20,6 +20,7 @@ class App extends Component {
     state = {
         loggedIn: false,
         currentUser: false,
+        clientList: []
     }
 
     componentDidMount() {
@@ -61,7 +62,6 @@ class App extends Component {
     }
 
     getUser = (user) => {
-        console.log(user, user.uid)
         this.handleCheckCurrentUser(user.uid)
     }
 
@@ -74,37 +74,31 @@ class App extends Component {
     }
 
     handleClientList = (data) => {
-        console.log(data)
         this.setState({
             clientList: data
         })
     }
 
     handleUpdateCurrentUser = async (userObj) => {
-        console.log(userObj);
-
         this.setState({
             loggedIn: userObj != false ? true : false,
             currentUser: userObj,
+            clientList: userObj.clients
         })
-        console.log(initWatchUserDb(userObj.dataID));
     }
 
 
 
     handleWatchUserClients = (dataID) => {
-        console.log('done')
        const docData = initWatchUserDb(dataID);
        return docData;
     }
 
 
-    // handleDeleteClient = (clientId) => {
-
-    //     this.setState(prevState => ({
-    //         currentUser: { ...prevState.currentUser, clients: [...prevState.currentUser.clients, clientData] }
-    //     }))
-    // }
+    handleDeleteClient = (dataID, clientId, storedClients) => {
+        console.log('DELETING CLIENT: ', clientId);
+        deleteClient(dataID, clientId, storedClients);
+    }
 
 
 
@@ -139,8 +133,9 @@ class App extends Component {
                             <Route path="clients" element={
                                 <Clients
                                     currentUser={this.state.currentUser}
-                                    watchUserDb={this.handleWatchUserClients}
                                     dataID={this.state.currentUser.dataID}
+                                    clientList={this.state.clientList}
+                                    deleteClient={this.handleDeleteClient}
                                 />} />
                             <Route path="clients/addclientform" element={
                                 <AddClientForm

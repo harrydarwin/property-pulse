@@ -8,8 +8,8 @@ import "./Client.css";
 
 
 
-export default function Client({fname, lname, email, phone, address, openQueries, queries, id}) {
-
+export default function Client({fname, lname, email, phone, address, openQueries, queries, id, dataID, clientList, deleteClient}) {
+    console.log(id, dataID, window.localStorage.pp47userAccessToken);
 
   return (
     <div id={'client-' + id} className='client'>
@@ -23,9 +23,10 @@ export default function Client({fname, lname, email, phone, address, openQueries
         <div className="client-info icon">
             <ClientDeleteButton
                 clientName={fname + ' ' + lname}
-                clientId={id}
-
-
+                clientID={id}
+                deleteClient={deleteClient}
+                dataID={window.localStorage.pp47userAccessToken? window.localStorage.pp47userAccessToken : dataID}
+                clientList={clientList}
             />
         </div>
 
@@ -33,3 +34,5 @@ export default function Client({fname, lname, email, phone, address, openQueries
     </div>
   )
 }
+
+// USED LOCAL STORAGE HACK TO CARRY DATA ID - NEED TO FIX

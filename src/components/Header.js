@@ -10,7 +10,6 @@ function LogoutButton({updateCurrentUser}) {
 function LoginButton() {
     return <li><button className="dropdown-item" type="button" onClick={() => {
        const card = $('.card-container');
-       console.log(card)
        card.addClass('shake-me');
        card.on('animationend', function() {
            card.removeClass('shake-me')

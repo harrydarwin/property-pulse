@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { deleteClient } from './firebase';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -6,13 +7,18 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import "./Modals.css";
 
 
-export default function ClientDeleteButton({clientName ,clientId, deleteClient}) {
+export default function ClientDeleteButton({clientName, clientID, dataID, clientList}) {
+    console.log(clientID, dataID)
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = (e) => {
       e.preventDefault();
       setShow(true);
+  }
+  const handleDeleteClient = (dataID, clientID, clientList) => {
+      console.log(deleteClient,dataID, clientID, clientList)
+      deleteClient(dataID, clientID, clientList);
   }
 
   return (
@@ -39,7 +45,7 @@ export default function ClientDeleteButton({clientName ,clientId, deleteClient})
           <Button className="btn-standard" onClick={handleClose}>
             Close
           </Button>
-          <Button className="btn-warning btn-standard" onClick={() => deleteClient(clientId)}><FontAwesomeIcon icon={faTrash} /> Delete client</Button>
+          <Button className="btn-warning btn-standard" onClick={() => handleDeleteClient(dataID, clientID, clientList.clientList)}><FontAwesomeIcon icon={faTrash} /> Delete client</Button>
         </Modal.Footer>
       </Modal>
     </>

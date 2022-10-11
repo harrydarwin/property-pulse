@@ -3,7 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate, Outlet } from "react-router-dom";
 import "./Dashboard.css";
 import { auth, db, userDB, logout } from "./firebase";
-import { query, collection, getDocs, where } from "firebase/firestore";
+import { query, collection, getDocs, where, onSnapshot } from "firebase/firestore";
 import Sidebar from "./Sidebar";
 
 
@@ -11,6 +11,8 @@ function Dashboard({getUser, updateCurrentUser}) {
 
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
+  const [clientList, setClientList] = useState([]);
+
   const navigate = useNavigate();
   const fetchUserName = async () => {
     try {
@@ -18,8 +20,8 @@ function Dashboard({getUser, updateCurrentUser}) {
       const doc = getDocs(q);
       doc.then(docs => {
           const data = docs.docs[0].data();
-          console.log(data)
           setName(data.name);
+          window.localStorage.setItem('pp47userAccessToken', data.dataID);
       })
     } catch (err) {
       console.error(err);
@@ -33,7 +35,23 @@ function Dashboard({getUser, updateCurrentUser}) {
     getUser(user);
     fetchUserName();
 
+    const userDbRef = collection(db, userDB);
+    const unsubscribe = onSnapshot(userDbRef, snapshot => {
+      snapshot.docs.forEach((doc) => {
+        if(doc.data().uid == user.uid){
+          const newData = doc.data();
+          setClientList(newData.clients);
+          updateCurrentUser(newData);
+        }
+      })
+    })
+    return () => {
+      unsubscribe();
+    }
   }, [user, loading]);
+
+   // Set up realtime updates for users clients list
+//
 
   return (
     <div className="dashboard container">

@@ -120,10 +120,38 @@ const updateUserProfile = async (dataID, name) => {
 }
 
 // add new client to users firebase clients list
-const addNewClient = async (dataID, clientData) => {
+const addNewClient = async (dataID, clientData, toAdd = true, storedClients) => {
+  let clientList;
+
   const userRef = doc(db, userDB, dataID);
   await updateDoc(userRef, {
-    clients: arrayUnion(clientData)
+    clients: !toAdd ? storedClients.filter(client => client.uid !== clientData) : arrayUnion(clientData)
+  });
+}
+
+// Delete client
+const deleteClient = async (dataID, clientID, storedClients) => {
+  console.log('firebase DELTETE', storedClients, '--------->', dataID, clientID)
+  const newClientList = storedClients.filter(client => client.uid !== clientID);
+  const userRef = doc(db, userDB, dataID);
+  await updateDoc(userRef, {
+    clients: newClientList
+  });
+
+}
+
+// Delete client
+// const deleteClient = async (dataID, clientID, storedClients) => {
+//   console.log('firebase DELTETE')
+//   await addNewClient(dataID, clientID, false, storedClients);
+// }
+
+const resetUser = async (uid, previousAttempts ) => {
+  const userRef = doc(db, "users", uid);
+  await updateDoc(userRef, {
+  score: 0,
+  displayName: "false",
+  attemptsFailed: previousAttempts + 1
   });
 }
 
@@ -199,5 +227,6 @@ export {
     registerWithEmailAndPassword,
     sendPasswordReset,
     logout,
-    initWatchUserDb
+    initWatchUserDb,
+    deleteClient
   };
