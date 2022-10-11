@@ -1,0 +1,33 @@
+
+.modal-content {
+    border-radius: 10px;
+    box-shadow: 5px 5px 15px rgb(0 0 0 / 50%);
+    border: none;
+}
+
+.modal-body {
+    padding: 2rem 1rem;
+}
+
+.modal-backdrop.show {
+    opacity: .5;
+}
+
+.modal-backdrop {
+    --bs-backdrop-bg: #fff;
+}
+
+.modal-delete-client .modal-header {
+    background-color: var(--warning-primary);
+    color: #fff;
+    border-radius: 10px 10px 0 0;
+}
+
+.modal-delete-client .modal-header .modal-title {
+    font-size: 2rem;
+}
+
+.btn-warning.btn-primary,
+.btn-standard.btn-primary {
+    font-size: 1.3rem;
+}

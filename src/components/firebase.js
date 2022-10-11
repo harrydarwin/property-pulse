@@ -40,11 +40,12 @@ const storage = getStorage();
 const userDB = process.env.REACT_APP_USERS_DB;
 
 // REALTIME UPDATES - to from userDB to currentUser state - MAY NOT NEED
-// const initWatchUserDb = (dataID) => {
-//   const toUpdate = onSnapshot(doc(db, userDB, dataID), (doc) => {
-//     console.log("Current data: ", doc.data());
-//   })
-// }
+const initWatchUserDb = (dataID) => {
+  const toUpdate = onSnapshot(doc(db, userDB, dataID), (doc) => {
+    console.log("Current data: ", doc.data());
+    return doc.data();
+  })
+}
 
 // sign IN with google function
 const googleProvider = new GoogleAuthProvider();
@@ -198,4 +199,5 @@ export {
     registerWithEmailAndPassword,
     sendPasswordReset,
     logout,
+    initWatchUserDb
   };

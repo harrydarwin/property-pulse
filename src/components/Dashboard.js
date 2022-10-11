@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { useNavigate, Routes, Route, Link, Outlet } from "react-router-dom";
+import { useNavigate, Outlet } from "react-router-dom";
 import "./Dashboard.css";
 import { auth, db, userDB, logout } from "./firebase";
 import { query, collection, getDocs, where } from "firebase/firestore";
@@ -18,6 +18,7 @@ function Dashboard({getUser, updateCurrentUser}) {
       const doc = getDocs(q);
       doc.then(docs => {
           const data = docs.docs[0].data();
+          console.log(data)
           setName(data.name);
       })
     } catch (err) {
@@ -25,12 +26,15 @@ function Dashboard({getUser, updateCurrentUser}) {
       alert("An error occured while fetching user data");
     }
   };
+
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
     getUser(user);
     fetchUserName();
+
   }, [user, loading]);
+
   return (
     <div className="dashboard container">
         <aside>
