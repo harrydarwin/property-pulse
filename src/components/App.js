@@ -10,7 +10,6 @@ import Profile from './Profile';
 import Header from './Header';
 import AddClientForm from './AddClientForm';
 import EditClientForm from './EditClientForm';
-import SignUpCard from './SignUpCard';
 import $ from 'jquery';
 
 import '../App.css';
