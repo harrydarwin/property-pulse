@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import Client from './Client';
 
 
-export default function ClientList(clientList, removeClient, dataID) {
-    console.log(dataID)
+export default function ClientList(clientList, dataID) {
     // check for clients
     const [clients, setClients] = useState(clientList);
     useEffect(() => {
@@ -36,7 +35,6 @@ export default function ClientList(clientList, removeClient, dataID) {
                         index={index}
                         dataID={dataID}
                         clientList={clientList}
-                        deleteClient={removeClient}
 
                         // changeScore={changeScore}
                     />

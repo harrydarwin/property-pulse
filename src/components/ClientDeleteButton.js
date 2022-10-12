@@ -8,7 +8,6 @@ import "./Modals.css";
 
 
 export default function ClientDeleteButton({clientName, clientID, dataID, clientList}) {
-    console.log(clientID, dataID)
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -17,7 +16,6 @@ export default function ClientDeleteButton({clientName, clientID, dataID, client
       setShow(true);
   }
   const handleDeleteClient = (dataID, clientID, clientList) => {
-      console.log(deleteClient,dataID, clientID, clientList)
       deleteClient(dataID, clientID, clientList);
   }
 

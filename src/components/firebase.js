@@ -131,20 +131,22 @@ const addNewClient = async (dataID, clientData, toAdd = true, storedClients) => 
 
 // Delete client
 const deleteClient = async (dataID, clientID, storedClients) => {
-  console.log('firebase DELTETE', storedClients, '--------->', dataID, clientID)
   const newClientList = storedClients.filter(client => client.uid !== clientID);
   const userRef = doc(db, userDB, dataID);
   await updateDoc(userRef, {
     clients: newClientList
   });
-
 }
 
 // Delete client
-// const deleteClient = async (dataID, clientID, storedClients) => {
-//   console.log('firebase DELTETE')
-//   await addNewClient(dataID, clientID, false, storedClients);
-// }
+const editClient = async (dataID, clientData, storedClients) => {
+ const newClientList = storedClients.map(c => c.uid == clientData.uid ? c = clientData : c);
+  const userRef = doc(db, userDB, dataID);
+  await updateDoc(userRef, {
+    clients: newClientList
+  });
+}
+
 
 const resetUser = async (uid, previousAttempts ) => {
   const userRef = doc(db, "users", uid);
@@ -228,5 +230,6 @@ export {
     sendPasswordReset,
     logout,
     initWatchUserDb,
-    deleteClient
+    deleteClient,
+    editClient
   };

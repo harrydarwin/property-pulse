@@ -1,18 +1,19 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { auth, getUserData, signInWithGoogle, updateUserImage, updateUserProfile, addNewClient, deleteClient, initWatchUserDb } from "./firebase";
+import { auth, getUserData, signInWithGoogle, updateUserImage, updateUserProfile, addNewClient, deleteClient, editClient, initWatchUserDb } from "./firebase";
 import Login from './Login';
 import Register from './Register';
 import Reset from './Reset';
 import Dashboard from './Dashboard';
 import Clients from './Clients';
 import Profile from './Profile';
-import $ from 'jquery';
-import SignUpCard from './SignUpCard';
-
-import '../App.css';
 import Header from './Header';
 import AddClientForm from './AddClientForm';
+import EditClientForm from './EditClientForm';
+import SignUpCard from './SignUpCard';
+import $ from 'jquery';
+
+import '../App.css';
 
 
 class App extends Component {
@@ -100,7 +101,10 @@ class App extends Component {
         deleteClient(dataID, clientId, storedClients);
     }
 
-
+    handleEditClient = (dataID, clientId, storedClients) => {
+        console.log('Editing CLIENT: ', clientId);
+        editClient(dataID, clientId, storedClients);
+    }
 
     render() {
         // console.log(this.state, this.state.currentUser)
@@ -136,11 +140,16 @@ class App extends Component {
                                     dataID={this.state.currentUser.dataID}
                                     clientList={this.state.clientList}
                                     deleteClient={this.handleDeleteClient}
+                                    editClient={this.handleEditClient}
                                 />} />
                             <Route path="clients/addclientform" element={
                                 <AddClientForm
-                                currentUser={this.state.currentUser}
+                                    currentUser={this.state.currentUser}
                                     addNewClient={this.handleAddNewClient}
+                                />} />
+                            <Route path="clients/editclientform" element={
+                                <EditClientForm
+                                    currentUser={this.state.currentUser}
                                 />} />
                         </Route>
 

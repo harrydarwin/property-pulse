@@ -9,17 +9,9 @@ import ClientList from "./ClientList";
 import Client from './Client';
 
 
-export default function Clients({ currentUser, dataID, clientList, deleteClient }) {
-    console.log(dataID, currentUser)
-    console.log(deleteClient)
+export default function Clients({ currentUser, dataID, clientList }) {
     const listDefaults = "card-container-full container card-container container-full row";
     const [userData, setUserData] = useState('');
-
-    const removeClient = (clientID, storedClients) => {
-        const access = dataID;
-        console.log(access);
-        deleteClient(access, clientID, storedClients);
-    }
 
     // const removeClient = () => {
 
@@ -56,7 +48,6 @@ export default function Clients({ currentUser, dataID, clientList, deleteClient 
                     <ClientList
                         clientList={clientList}
                         dataID={dataID}
-                        removeClient={removeClient}
                     />
                 </div>
             </div>
