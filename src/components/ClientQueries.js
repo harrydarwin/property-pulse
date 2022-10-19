@@ -1,29 +1,28 @@
+import { Query } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
-import Client from './Client';
+import ClientQuery from './ClientQuery';
 
 
-export default function ClientList(clientList, dataID) {
+export default function ClientQueries(client) {
     // check for clients
-    // const [clients, setClients] = useState(clientList);
-    // useEffect(() => {
-    //     setClients(clientList);
-    // },[clients]);
-    if(!clientList.clientList || clientList.clientList.length < 1){
-        return <h3>You haven't added any clients yet. </h3>
+
+    if(!client.client.queries || client.client.queries.length < 1){
+        console.log(client)
+        return <h3>You have no open searches for {client.client.fname} {client.client.lname}. </h3>
     } else {
-        const clients = clientList.clientList;
+        const queries = client.client.queries;
         // Map clientList.current clients into a client component
-        return <><div className="table-headings p-4 pl-5">
+        return <>
+        {/* <div className="table-headings p-4 pl-5">
         <div className="client-info">First</div>
         <div className="client-info">Last</div>
         <div className="client-info">Email</div>
         <div className="client-info">Phone</div>
         <div className="client-info">Address</div>
     </div><div className="client-list p-4">
-            {/* Players list */}
+            Players list
             {clients.map((client, index) =>
-                    <Client
-                        client={client}
+                    <Query
                         fname={client.fname}
                         lname={client.lname}
                         address={client.currentAddress}
@@ -35,12 +34,10 @@ export default function ClientList(clientList, dataID) {
                         key={client.uid}
                         index={index}
                         dataID={dataID}
-                        clientList={clientList}
-
-                        // changeScore={changeScore}
+                        clientList={currentUser.clients}
                     />
                 )}
-        </div>
+        </div> */}
         </>
     }
 }

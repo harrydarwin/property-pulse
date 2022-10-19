@@ -4,10 +4,16 @@ import { editClient } from './firebase';
 import { useNavigate } from "react-router-dom";
 
 
-export default function ClientPersonalInfoEdit({ currentUser, clientId, client }) {
-    let cl = client;
-    // currentUser.clients.forEach(client => client.uid == clientId ? cl = client : null)
+// Multi-step form
+// 1. search by house address, building address OR both within the radius from an address
+// 2. house, buidling or address,
+// 3. *** if radius search - BRING UP MAP)
+// 4. notification options - notify me (agent)? Notify me if client is selling? Frequency of notification to client?
 
+
+export default function ClientSearchParams({ currentUser, clientId, addNewClient }) {
+    let cl;
+    currentUser.clients.forEach(client => client.uid == clientId ? cl = client : null)
     const navigate = useNavigate();
     // const [client, setClient] = useState(cl);
     const [fName, setFName] = useState('');

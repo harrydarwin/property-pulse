@@ -10,6 +10,7 @@ import Profile from './Profile';
 import Header from './Header';
 import AddClientForm from './AddClientForm';
 import EditClientForm from './EditClientForm';
+import PropertySearchForm from './PropertySearchForm';
 import $ from 'jquery';
 
 import '../App.css';
@@ -134,22 +135,26 @@ class App extends Component {
                                     updateUserProfileInfo={this.handleUserProfileUpdate}
                                 />} />
                             <Route path="clients" element={
-                                <Clients
-                                    currentUser={this.state.currentUser}
-                                    dataID={this.state.currentUser.dataID}
-                                    clientList={this.state.clientList}
-                                    deleteClient={this.handleDeleteClient}
-                                    editClient={this.handleEditClient}
-                                />} />
+                            <Clients
+                                currentUser={this.state.currentUser}
+                                dataID={this.state.currentUser.dataID}
+                                clientList={this.state.clientList}
+                                deleteClient={this.handleDeleteClient}
+                                editClient={this.handleEditClient}
+                            />} />
                             <Route path="clients/addclientform" element={
                                 <AddClientForm
                                     currentUser={this.state.currentUser}
                                     addNewClient={this.handleAddNewClient}
-                                />} />
+                            />} />
                             <Route path="clients/editclientform" element={
                                 <EditClientForm
                                     currentUser={this.state.currentUser}
-                                />} />
+                            />} />
+                            <Route path="clients/propertysearchform" element={
+                                <PropertySearchForm
+                                    currentUser={this.state.currentUser}
+                            />} />
                         </Route>
 
                     </Routes>

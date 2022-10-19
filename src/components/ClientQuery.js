@@ -11,7 +11,7 @@ import "./Client.css";
 
 
 
-export default function Client({ client, fname, lname, email, phone, address, openQueries, queries, id, dataID, clientList }) {
+export default function Client({ fname, lname, email, phone, address, openQueries, queries, id, dataID, clientList }) {
     const [tooltip, showTooltip] = useState(true);
 
     return (
@@ -35,7 +35,7 @@ export default function Client({ client, fname, lname, email, phone, address, op
                     showTooltip(false);
                     setTimeout(() => showTooltip(true), 50);
                 }} >
-                <Link className="p-3" to="EditClientForm" state={{ clientUid: id, clientQueries: queries, client: client }}><FontAwesomeIcon icon={faPencil} /></Link>
+                <Link className="p-3" to="EditClientForm" state={{ clientUid: id }}><FontAwesomeIcon icon={faPencil} /></Link>
             </div>
 
             <div className="client-info icon" data-tip data-for={'client-delete-' + id} onMouseEnter={() => showTooltip(true)}
