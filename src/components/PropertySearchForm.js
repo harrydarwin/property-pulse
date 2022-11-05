@@ -8,7 +8,7 @@ import ClientSearchParams from './ClientSearchParams';
 export default function PropertySearchForm({currentUser}) {
     const location = useLocation();
     const { clientUid } = location.state;
-
+    const [clientId, setClientId] = useState(clientUid);
     return (
         <>
             <div className="tab-title-submenu d-flex justify-content-between align-items-center mx-5">
@@ -19,7 +19,7 @@ export default function PropertySearchForm({currentUser}) {
                     </li>
                 </ul>
             </div>
-            <ClientSearchParams currentUser={currentUser} clientId={clientUid} />
+            <ClientSearchParams currentUser={currentUser} clientId={clientId} />
         </>
     )
 }

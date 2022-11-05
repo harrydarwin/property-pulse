@@ -85,6 +85,13 @@ a:hover {
   border-color: #6c757d;
 }
 
+.selected-input {
+  color: #fff;
+  background: #8bbabb;
+  border-color: #8bbabb;
+  outline: none!important;
+}
+
 .btn-warning {
   color: var(--warning-primary);
   border-color: var(--warning-primary);
