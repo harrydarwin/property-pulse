@@ -167,6 +167,16 @@ a:hover {
   border-radius: 10px;
 }
 
+.form-check-failed .btn-standard:not(button) {
+  border-color: var(--warning-primary);
+}
+
+.form-fail-message {
+  color: var(--warning-primary);
+  font-style: italic;
+  height: 22.5px;
+}
+
 .shake-me {
   animation: shake 5s;
 }

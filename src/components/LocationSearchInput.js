@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 
-const LocationSearchInput = ({classes, locationPlaceholder, updateClientAddress}) => {
+const LocationSearchInput = ({classes, locationPlaceholder, setAddress}) => {
  const autoCompleteRef = useRef();
  const inputRef = useRef();
  const options = {
@@ -16,7 +16,7 @@ const LocationSearchInput = ({classes, locationPlaceholder, updateClientAddress}
   autoCompleteRef.current.addListener("place_changed", async function () {
     const place = await autoCompleteRef.current.getPlace();
     console.log(place);
-    updateClientAddress(place);
+    setAddress(place);
    });
  }, []);
  return (

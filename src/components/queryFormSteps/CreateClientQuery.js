@@ -6,7 +6,7 @@ import Success from './Success';
 
 
 
-const CreateClientQuery = () => {
+const CreateClientQuery = ({user, clientId, client}) => {
 
     const [step, setStep] = useState(1);
     const [queryType, setQueryType] = useState('');
@@ -32,7 +32,14 @@ const CreateClientQuery = () => {
 switch (step) {
   case 1:
     return (
-      <QueryType nextStep={nextStep} setType={setQueryType} values={values} />
+      <QueryType
+        nextStep={nextStep}
+        setType={setQueryType}
+        values={values}
+        setAddress={setQueryAddress}
+        setStreetName={setStreetName}
+        setRadius={setRadius}
+      />
     )
   case 2:
     return (
@@ -45,7 +52,7 @@ switch (step) {
     )
   case 3:
     return (
-      <Confirmation nextStep={nextStep} prevStep={prevStep} values={values} />
+      <Confirmation nextStep={nextStep} prevStep={prevStep} values={values} user={user} clientId={clientId} client={client} />
     )
   case 4:
     return (

@@ -13,7 +13,6 @@ import "./Client.css";
 
 export default function Client({ client, fname, lname, email, phone, address, openQueries, queries, id, dataID, clientList }) {
     const [tooltip, showTooltip] = useState(true);
-
     return (
         <div id={'client-' + id} className='client'>
             <div className="client-info">{fname}</div>

@@ -65,7 +65,7 @@ export default function ClientPersonalInfoEdit({ currentUser, clientId, client }
     //   }
     // }, [client])
 
-
+// ADD LIST VIEW OF CLIENT QUERIES + ABILITY TO ADD AND/OR DELETE
     return (
         <div className="card-container-full container card-container container-full p-4 row">
             <legend className='text-center mb-5'>Edit their basic info</legend>
@@ -107,7 +107,7 @@ export default function ClientPersonalInfoEdit({ currentUser, clientId, client }
                 <div className="location-search row mb-5">
                     <LocationSearchInput classes={'d-flex px-0'}
                         locationPlaceholder={cl.currentAddress.addrFormatted}
-                        updateClientAddress={handleClientAddress}
+                        setAddress={handleClientAddress}
                     />
                 </div>
                 <div className="row justify-content-end">

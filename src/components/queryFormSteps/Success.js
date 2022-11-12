@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Success = () => {
+const Success = ({ nextStep, prevStep, values }) => {
   return (
     <div>Success</div>
   )

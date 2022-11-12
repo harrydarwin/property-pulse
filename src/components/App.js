@@ -122,6 +122,7 @@ class App extends Component {
                         />} />
                         <Route exact path="/register" element={<Register />} />
                         <Route exact path="/reset" element={<Reset />} />
+
                         <Route exact path="/dashboard" element={
                             <Dashboard
                                 getUser={this.getUser}
@@ -135,12 +136,12 @@ class App extends Component {
                                     updateUserProfileInfo={this.handleUserProfileUpdate}
                                 />} />
                             <Route path="clients" element={
-                            <Clients
-                                currentUser={this.state.currentUser}
-                                dataID={this.state.currentUser.dataID}
-                                clientList={this.state.clientList}
-                                deleteClient={this.handleDeleteClient}
-                                editClient={this.handleEditClient}
+                                <Clients
+                                    currentUser={this.state.currentUser}
+                                    dataID={this.state.currentUser.dataID}
+                                    clientList={this.state.clientList}
+                                    deleteClient={this.handleDeleteClient}
+                                    editClient={this.handleEditClient}
                             />} />
                             <Route path="clients/addclientform" element={
                                 <AddClientForm
@@ -154,6 +155,7 @@ class App extends Component {
                             <Route path="clients/propertysearchform" element={
                                 <PropertySearchForm
                                     currentUser={this.state.currentUser}
+                                    fromUser={false}
                             />} />
                         </Route>
 

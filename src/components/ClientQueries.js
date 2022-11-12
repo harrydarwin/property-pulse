@@ -3,41 +3,40 @@ import React, { useEffect, useState } from "react";
 import ClientQuery from './ClientQuery';
 
 
-export default function ClientQueries(client) {
+export default function ClientQueries(currentUser, clientId) {
     // check for clients
-
-    if(!client.client.queries || client.client.queries.length < 1){
+    const [client, setClient] = useState(currentUser.client);
+    const [queries, setQueries] = useState(client.queries)
+    if (!client.queries || client.queries.length < 1) {
         console.log(client)
-        return <h3>You have no open searches for {client.client.fname} {client.client.lname}. </h3>
+        return <>
+            <h3>You have no open searches for {client.fname} {client.lname}. </h3>
+        </>
     } else {
-        const queries = client.client.queries;
+
+        // const queries = client.queries;
+// NEED TO MAKE A FETCH QUERIES FUNCTION SO THAT THEY ARE UPDATED LIVE WHEN YOU ADD A NEW ONE
+        console.log(queries)
+
         // Map clientList.current clients into a client component
         return <>
-        {/* <div className="table-headings p-4 pl-5">
-        <div className="client-info">First</div>
-        <div className="client-info">Last</div>
-        <div className="client-info">Email</div>
-        <div className="client-info">Phone</div>
-        <div className="client-info">Address</div>
-    </div><div className="client-list p-4">
-            Players list
-            {clients.map((client, index) =>
-                    <Query
-                        fname={client.fname}
-                        lname={client.lname}
-                        address={client.currentAddress}
-                        email={client.email}
-                        phone={client.phoneNumber}
-                        openQueries={client.openQueries}
-                        queries={client.queries}
-                        id={client.uid}
-                        key={client.uid}
-                        index={index}
-                        dataID={dataID}
-                        clientList={currentUser.clients}
-                    />
-                )}
-        </div> */}
+            <div className="card-container-full container card-container container-full p-4 row">
+                <legend className='text-center mb-5'>Modify or remove property searches</legend>
+                <div className="table-headings p-4 pl-5">
+                    <div className="client-info">Search type</div>
+                    <div className="client-info">Search parameters</div>
+                </div>
+                <div className="client-list p-4">
+                    {queries.map((query, index) =>
+                        <ClientQuery
+                            data={query}
+                            id={query.queryType + '-' + client.uid + '-' + query.created_at.seconds}
+                            key={query.queryType + '-' + client.uid + '-' + query.created_at.seconds}
+                            index={index}
+                        />
+                    )}
+                </div>
+            </div>
         </>
     }
 }

@@ -8,20 +8,20 @@ export default function ClientList(clientList, dataID) {
     // useEffect(() => {
     //     setClients(clientList);
     // },[clients]);
-    if(!clientList.clientList || clientList.clientList.length < 1){
+    if (!clientList.clientList || clientList.clientList.length < 1) {
         return <h3>You haven't added any clients yet. </h3>
     } else {
         const clients = clientList.clientList;
         // Map clientList.current clients into a client component
         return <><div className="table-headings p-4 pl-5">
-        <div className="client-info">First</div>
-        <div className="client-info">Last</div>
-        <div className="client-info">Email</div>
-        <div className="client-info">Phone</div>
-        <div className="client-info">Address</div>
-    </div><div className="client-list p-4">
-            {/* Players list */}
-            {clients.map((client, index) =>
+            <div className="client-info">First</div>
+            <div className="client-info">Last</div>
+            <div className="client-info">Email</div>
+            <div className="client-info">Phone</div>
+            <div className="client-info">Address</div>
+        </div><div className="client-list p-4">
+                {/* Players list */}
+                {clients.map((client, index) =>
                     <Client
                         client={client}
                         fname={client.fname}
@@ -37,10 +37,10 @@ export default function ClientList(clientList, dataID) {
                         dataID={dataID}
                         clientList={clientList}
 
-                        // changeScore={changeScore}
+                    // changeScore={changeScore}
                     />
                 )}
-        </div>
+            </div>
         </>
     }
 }

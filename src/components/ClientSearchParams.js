@@ -12,20 +12,20 @@ import { useNavigate } from "react-router-dom";
 // 4. notification options - notify me (agent)? Notify me if client is selling? Frequency of notification to client?
 
 
-export default function ClientSearchParams({ currentUser, clientId }) {
+export default function ClientSearchParams({ currentUser, clientId, client }) {
 
 
-    let cl;
-    currentUser.clients.forEach(client => client.uid == clientId ? cl = client : null)
+    // let cl;
+    // currentUser.clients.forEach(client => client.uid == clientId ? cl = client : null)
     const navigate = useNavigate();
 
 
     return (
         <div className="card-container-full container card-container container-full p-4 row">
-            <legend className='text-center mb-5'>Create a new Property Pulse</legend>
+            <legend className='text-center mb-5'>Create a new property search</legend>
             <div className="col-12 col-md-8 col-lg-6 mx-auto">
 
-                <CreateClientQuery user={currentUser} clientId={clientId} client={cl} />
+                <CreateClientQuery user={currentUser} clientId={clientId} client={client} />
 
             </div>
         </div>

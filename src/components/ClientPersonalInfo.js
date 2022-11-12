@@ -120,7 +120,7 @@ export default function ClientPersonalInfo({ currentUser, addNewClient }) {
                 <div className="location-search row mb-5">
                     <LocationSearchInput classes={'d-flex px-0'}
                         locationPlaceholder={"Client's current address"}
-                        updateClientAddress={handleClientAddress}
+                        setAddress={handleClientAddress}
                     />
                 </div>
                 <div className="row justify-content-end">
