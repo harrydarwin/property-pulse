@@ -177,6 +177,10 @@ a:hover {
   height: 22.5px;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 .shake-me {
   animation: shake 5s;
 }

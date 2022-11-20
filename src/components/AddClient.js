@@ -3,8 +3,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRotateLeft, faHandPointLeft } from '@fortawesome/free-solid-svg-icons';
 import { Link } from "react-router-dom";
 import ClientPersonalInfo from './ClientPersonalInfo';
-export default function AddClientForm({currentUser, addNewClient}) {
 
+
+export default function AddClient({currentUser, addNewClient}) {
 
     return (
         <>

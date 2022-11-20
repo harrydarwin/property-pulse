@@ -8,6 +8,14 @@ import Success from './Success';
 
 const CreateClientQuery = ({user, clientId, client}) => {
 
+  const [currentClient, setCurrentClient] = useState(client);
+  if(!currentClient || currentClient == undefined) {
+    client = user.clients.filter(client => client.uid == clientId)[0];
+
+    console.log(client)
+
+  }
+
     const [step, setStep] = useState(1);
     const [queryType, setQueryType] = useState('');
     const [queryAddress, setQueryAddress] = useState('');
@@ -55,8 +63,9 @@ switch (step) {
       <Confirmation nextStep={nextStep} prevStep={prevStep} values={values} user={user} clientId={clientId} client={client} />
     )
   case 4:
+    console.log(client)
     return (
-      <Success />
+      <Success values={values} clientUid={clientId} client={client} />
     )
   // never forget the default case, otherwise VS code would be mad!
   default:

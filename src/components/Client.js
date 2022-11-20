@@ -26,7 +26,7 @@ export default function Client({ client, fname, lname, email, phone, address, op
                     showTooltip(false);
                     setTimeout(() => showTooltip(true), 50);
                 }} >
-                <Link className="p-3" to="PropertySearchForm" state={{ clientUid: id }}><FontAwesomeIcon icon={faMagnifyingGlassPlus} /></Link>
+                <Link className="p-3" to="editclient/propertysearch" state={{ clientUid: id }}><FontAwesomeIcon icon={faMagnifyingGlassPlus} /></Link>
             </div>
 
             <div className="client-info icon icon-edit" data-tip data-for={'client-edit-' + id} onMouseEnter={() => showTooltip(true)}
@@ -34,7 +34,7 @@ export default function Client({ client, fname, lname, email, phone, address, op
                     showTooltip(false);
                     setTimeout(() => showTooltip(true), 50);
                 }} >
-                <Link className="p-3" to="EditClientForm" state={{ clientUid: id, clientQueries: queries, client: client }}><FontAwesomeIcon icon={faPencil} /></Link>
+                <Link className="p-3" to="EditClient" state={{ clientUid: id, clientQueries: queries, client: client }}><FontAwesomeIcon icon={faPencil} /></Link>
             </div>
 
             <div className="client-info icon" data-tip data-for={'client-delete-' + id} onMouseEnter={() => showTooltip(true)}

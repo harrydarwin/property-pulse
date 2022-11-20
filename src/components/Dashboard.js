@@ -7,11 +7,12 @@ import { query, collection, getDocs, where, onSnapshot } from "firebase/firestor
 import Sidebar from "./Sidebar";
 
 
-function Dashboard({getUser, updateCurrentUser}) {
+function Dashboard({getUser, updateCurrentUser, userData}) {
 
   const [user, loading, error] = useAuthState(auth);
   const [name, setName] = useState("");
   const [clientList, setClientList] = useState([]);
+  const [currentUser, setCurrentUser] = useState(userData);
 
   const navigate = useNavigate();
   const fetchUserName = async () => {
@@ -29,6 +30,14 @@ function Dashboard({getUser, updateCurrentUser}) {
     }
   };
 
+  // useEffect( () => {
+  //   setCurrentUser(userData);
+  // },[userData])
+
+  // useEffect(()=> {
+
+  // },[clientList])
+
   useEffect(() => {
     if (loading) return;
     if (!user) return navigate("/");
@@ -42,10 +51,12 @@ function Dashboard({getUser, updateCurrentUser}) {
           const newData = doc.data();
           setClientList(newData.clients);
           updateCurrentUser(newData);
+          console.log("WE UPDATED TO THIS: ", newData.clients)
         }
       })
     })
     return () => {
+      console.log('stop watch')
       unsubscribe();
     }
   }, [user, loading]);

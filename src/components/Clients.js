@@ -4,7 +4,7 @@ import { db, userDB } from './firebase';
 import { collection, onSnapshot } from "firebase/firestore";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
-import AddClientForm from './AddClientForm';
+import AddClient from './AddClient';
 import ClientList from "./ClientList";
 import Client from './Client';
 
@@ -38,7 +38,7 @@ export default function Clients({ currentUser, dataID, clientList }) {
                 <h1 className='mt-0'>Clients</h1>
                 <ul className="submenu">
                     <li className="submenu-item">
-                        <Link to="AddClientForm"><span className="me-1">Add client</span> <FontAwesomeIcon icon={faUserPlus} /></Link>
+                        <Link to="addclient"><span className="me-1">Add client</span> <FontAwesomeIcon icon={faUserPlus} /></Link>
                     </li>
                 </ul>
             </div>

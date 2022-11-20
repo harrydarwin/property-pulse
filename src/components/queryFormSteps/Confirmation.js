@@ -3,10 +3,10 @@ import { editClient } from '../firebase';
 
 const Confirmation = ({ nextStep, prevStep, values, user, clientId, client }) => {
     const [propertySearch, setPropertySearch] = useState(values);
-    console.log(values, user, clientId, client)
+    // console.log(values, user, clientId, client)
     if (client == undefined) {
         client = user.clients.filter(cl => cl.uid === clientId)[0]
-        console.log(client)
+        // console.log(client)
     }
     // formats our new search paramters into a new query fort he current client and loads it into their firbaseData
     const handleCreateNewQuery = () => {

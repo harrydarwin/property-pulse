@@ -5,8 +5,15 @@ import ClientQuery from './ClientQuery';
 
 export default function ClientQueries(currentUser, clientId) {
     // check for clients
+    // const currentClient = currentUser.clients.filter(client => client.uid == clientId)[0];
+    console.log(currentUser)
     const [client, setClient] = useState(currentUser.client);
+    console.log(currentUser)
     const [queries, setQueries] = useState(client.queries)
+
+    // useEffect(()=>{
+    //     setQueries()
+    // })
     if (!client.queries || client.queries.length < 1) {
         console.log(client)
         return <>

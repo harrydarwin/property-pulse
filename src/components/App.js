@@ -8,9 +8,9 @@ import Dashboard from './Dashboard';
 import Clients from './Clients';
 import Profile from './Profile';
 import Header from './Header';
-import AddClientForm from './AddClientForm';
-import EditClientForm from './EditClientForm';
-import PropertySearchForm from './PropertySearchForm';
+import AddClient from './AddClient';
+import EditClient from './EditClient';
+import PropertySearch from './PropertySearch';
 import $ from 'jquery';
 
 import '../App.css';
@@ -70,6 +70,7 @@ class App extends Component {
 
         const currentUser = getUserData(auth.currentUser.uid);
         currentUser.then(data => {
+            console.log(data)
             this.handleUpdateCurrentUser(data);
         })
     }
@@ -81,6 +82,7 @@ class App extends Component {
     }
 
     handleUpdateCurrentUser = async (userObj) => {
+        console.log('user update from app: ', userObj)
         this.setState({
             loggedIn: userObj != false ? true : false,
             currentUser: userObj,
@@ -92,6 +94,7 @@ class App extends Component {
 
     handleWatchUserClients = (dataID) => {
        const docData = initWatchUserDb(dataID);
+       console.log(docData)
        return docData;
     }
 
@@ -107,7 +110,7 @@ class App extends Component {
     }
 
     render() {
-        // console.log(this.state, this.state.currentUser)
+        console.log(this.state.currentUser)
         return (
             <div id="appContainer">
                 <Router>
@@ -127,6 +130,8 @@ class App extends Component {
                             <Dashboard
                                 getUser={this.getUser}
                                 updateCurrentUser={this.handleUpdateCurrentUser}
+                                userData={this.state.currentUser}
+
                             />
                         }>
                             <Route path="profile" element={
@@ -143,17 +148,18 @@ class App extends Component {
                                     deleteClient={this.handleDeleteClient}
                                     editClient={this.handleEditClient}
                             />} />
-                            <Route path="clients/addclientform" element={
-                                <AddClientForm
+                            <Route path="clients/addclient" element={
+                                <AddClient
                                     currentUser={this.state.currentUser}
                                     addNewClient={this.handleAddNewClient}
                             />} />
-                            <Route path="clients/editclientform" element={
-                                <EditClientForm
+                            <Route path="clients/editclient" element={
+                                <EditClient
                                     currentUser={this.state.currentUser}
+                                    checkCurrentUser={this.handleCheckCurrentUser}
                             />} />
-                            <Route path="clients/propertysearchform" element={
-                                <PropertySearchForm
+                            <Route path="/dashboard/clients/editclient/propertysearch" element={
+                                <PropertySearch
                                     currentUser={this.state.currentUser}
                                     fromUser={false}
                             />} />

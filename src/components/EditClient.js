@@ -1,19 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlassPlus } from '@fortawesome/free-solid-svg-icons';
 import { faArrowRotateLeft, faHandPointLeft } from '@fortawesome/free-solid-svg-icons';
 import ClientPersonalInfoEdit from './ClientPersonalInfoEdit';
 import ClientQueries from './ClientQueries';
-import PropertySearchForm from './PropertySearchForm';
+import PropertySearch from './PropertySearch';
 
 
-export default function EditClientForm({currentUser}) {
+export default function EditClient({currentUser}) {
     const location = useLocation();
     const { clientUid, clientQueries, client } = location.state;
     const [editClientInfo, setEditClientInfo] = useState(false);
     const [queryMode, setQueryMode] = useState(false);
-    console.log(client, location.state)
+    const [userData, setUserData] = useState(currentUser);
+    // console.log(client, location.state)
 
     const handleCreateNewQuery = e => {
         e.preventDefault();
@@ -26,6 +27,12 @@ export default function EditClientForm({currentUser}) {
         setEditClientInfo(current => !current);
         setQueryMode(false);
     }
+    // console.log(clientQueries)
+
+    useEffect(() => {
+        setUserData(currentUser)
+    },[userData])
+
 
     return (
         <>
@@ -36,7 +43,8 @@ export default function EditClientForm({currentUser}) {
                         <a onClick={toggleEditMode} href="">Edit {editClientInfo == false ? 'client profile' : 'property searches'}</a>
                     </li>
                     <li className="submenu-item me-5">
-                        <a onClick={handleCreateNewQuery} href=""><span className="me-1" >New search</span> <FontAwesomeIcon  icon={faMagnifyingGlassPlus} /></a>
+                        {/* <a onClick={handleCreateNewQuery} href=""><span className="me-1" >New search</span> <FontAwesomeIcon  icon={faMagnifyingGlassPlus} /></a> */}
+                        <Link className="p-3" to="propertysearch" state={{ clientUid: client.uid }}><span className="me-1" >New search</span> <FontAwesomeIcon icon={faMagnifyingGlassPlus} /></Link>
                     </li>
                     <li className="submenu-item">
                         <Link to="/dashboard/clients"><FontAwesomeIcon icon={faArrowRotateLeft} /> <span className="ml-1">Back</span></Link>
@@ -45,9 +53,7 @@ export default function EditClientForm({currentUser}) {
             </div>
             {
                 editClientInfo == false && queryMode == false ?
-                <ClientQueries currentUser={currentUser} clientId={clientUid} client={client} />
-                : queryMode == true ?
-                <PropertySearchForm currentUser={currentUser} clientId={clientUid} fromUser={true}/>
+                <ClientQueries currentUser={userData} clientId={clientUid} client={client}/>
                 :
                 <ClientPersonalInfoEdit currentUser={currentUser} clientId={clientUid} client={client} />
             }
