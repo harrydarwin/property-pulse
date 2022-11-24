@@ -75,13 +75,19 @@ const QueryLocation = ({ nextStep, prevStep, values, setAddress, setStreetName, 
             <>
                 <div className='mb-2'>Lets lock this street down!</div>
                 <form>
-                    <input
+                    <div className="location-search row">
+                        <LocationSearchInput classes={'d-flex px-0'}
+                            locationPlaceholder={"Enter a street name"}
+                            setAddress={setAddress}
+                        />
+                    </div>
+                    {/* <input
                             type="text"
                             className="login__textBox col-12 mb-0"
                             placeholder="Enter a street name"
                             value={street}
                             onChange={(e) => setStreet(e.target.value)}
-                        />
+                        /> */}
                 </form>
             </>
             :

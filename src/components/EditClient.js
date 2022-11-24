@@ -37,7 +37,7 @@ export default function EditClient({currentUser}) {
     return (
         <>
             <div className="tab-title-submenu d-flex justify-content-between align-items-center mx-5">
-                <h1 className='mt-0'>Edit client</h1>
+                <h1 className='mt-0 edit-client'>Edit client - <span>{client.fname} {client.lname}</span></h1>
                 <ul className="submenu d-flex">
                     <li className="submenu-item me-5">
                         <a onClick={toggleEditMode} href="">Edit {editClientInfo == false ? 'client profile' : 'property searches'}</a>
@@ -53,7 +53,7 @@ export default function EditClient({currentUser}) {
             </div>
             {
                 editClientInfo == false && queryMode == false ?
-                <ClientQueries currentUser={userData} clientId={clientUid} client={client}/>
+                <ClientQueries currentUser={currentUser} clientId={clientUid} client={client}/>
                 :
                 <ClientPersonalInfoEdit currentUser={currentUser} clientId={clientUid} client={client} />
             }

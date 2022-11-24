@@ -7,6 +7,7 @@
 }
 
 .client,
+.query,
 .table-headings {
     display: grid;
     grid-template-columns: 2fr 2fr 2fr 2fr 4fr 1fr 1fr 1fr;
@@ -22,6 +23,10 @@
 .client-info.icon {
     justify-self: center;
     color: #999;
+}
+
+.query .client-info.icon {
+    grid-column-start: 8;
 }
 
 .client-info.icon a {

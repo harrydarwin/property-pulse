@@ -3,27 +3,29 @@ import React, { useEffect, useState } from "react";
 import ClientQuery from './ClientQuery';
 
 
-export default function ClientQueries(currentUser, clientId) {
+export default function ClientQueries(currentUser, clientId, client) {
+ console.log(currentUser, client)
     // check for clients
     // const currentClient = currentUser.clients.filter(client => client.uid == clientId)[0];
-    console.log(currentUser)
-    const [client, setClient] = useState(currentUser.client);
-    console.log(currentUser)
-    const [queries, setQueries] = useState(client.queries)
-
-    // useEffect(()=>{
-    //     setQueries()
-    // })
-    if (!client.queries || client.queries.length < 1) {
-        console.log(client)
+    const [currentClient, setCurrentClient] = useState(currentUser.client);
+    console.log(currentUser.client)
+    const [queries, setQueries] = useState(currentUser.client.queries)
+    useEffect(()=>{
+        const cList = currentUser.currentUser.clients;
+        const c = cList.filter(c => c.uid == currentUser.clientId)[0];
+        console.log(c, cList, currentUser.clientId)
+        setQueries(c.queries)
+    }, [currentUser])
+    if (!queries || queries.length < 1) {
+        console.log(currentClient)
         return <>
-            <h3>You have no open searches for {client.fname} {client.lname}. </h3>
+            <h3>You have no open searches for {currentClient.fname} {currentClient.lname}. </h3>
         </>
     } else {
 
         // const queries = client.queries;
 // NEED TO MAKE A FETCH QUERIES FUNCTION SO THAT THEY ARE UPDATED LIVE WHEN YOU ADD A NEW ONE
-        console.log(queries)
+        console.log(queries, clientId, currentUser)
 
         // Map clientList.current clients into a client component
         return <>
@@ -37,8 +39,11 @@ export default function ClientQueries(currentUser, clientId) {
                     {queries.map((query, index) =>
                         <ClientQuery
                             data={query}
-                            id={query.queryType + '-' + client.uid + '-' + query.created_at.seconds}
-                            key={query.queryType + '-' + client.uid + '-' + query.created_at.seconds}
+                            id={query.queryType + '-' + currentClient.uid + '-' + query.created_at.seconds}
+                            clientID={currentUser.clientId}
+                            dataID={currentUser.currentUser.dataID}
+                            clientList={currentUser.currentUser.clients}
+                            key={query.queryType + '-' + currentClient.uid + '-' + query.created_at.seconds}
                             index={index}
                         />
                     )}

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { deleteClient } from './firebase';
+import { deleteClient, deleteClientQuery } from './firebase';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,7 +7,8 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import "./Modals.css";
 
 
-export default function ClientDeleteButton({clientName, clientID, dataID, clientList}) {
+export default function ClientDeleteButton({clientName, clientID, dataID, clientList, queryID}) {
+  // console.log(clientList)
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -16,8 +17,15 @@ export default function ClientDeleteButton({clientName, clientID, dataID, client
       setShow(true);
   }
   const handleDeleteClient = (dataID, clientID, clientList) => {
+    // console.log(clientList)
       deleteClient(dataID, clientID, clientList);
   }
+
+  const handleDeleteQuery = () => {
+    deleteClientQuery(dataID, clientID, clientList, queryID);
+}
+
+  const toDelete = queryID ? 'query' : 'client';
 
   return (
     <>
@@ -37,13 +45,13 @@ export default function ClientDeleteButton({clientName, clientID, dataID, client
           <Modal.Title>Are you sure you want to remove {clientName}?</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Clicking 'delete client' will remove this client and all of their data permanently.
+          Clicking 'delete {toDelete}' will remove this {toDelete} and all of {queryID ? 'its' : 'their'} data permanently.
         </Modal.Body>
         <Modal.Footer>
           <Button className="btn-standard" onClick={handleClose}>
             Close
           </Button>
-          <Button className="btn-warning btn-standard" onClick={() => handleDeleteClient(dataID, clientID, clientList.clientList)}><FontAwesomeIcon icon={faTrash} /> Delete client</Button>
+          <Button className="btn-warning btn-standard" onClick={queryID ? () => handleDeleteQuery(dataID, clientID, clientList.clientList, queryID) : () => handleDeleteClient(dataID, clientID, clientList.clientList)}><FontAwesomeIcon icon={faTrash} /> Delete {toDelete}</Button>
         </Modal.Footer>
       </Modal>
     </>

@@ -138,10 +138,31 @@ const deleteClient = async (dataID, clientID, storedClients) => {
   });
 }
 
+const getQueryId = (q, clientID) => {
+  console.log(q.created_at.seconds);
+  console.log(q.queryType + '-' + clientID + '-' + q.created_at.seconds)
+  return q.queryType + '-' + clientID + '-' + q.created_at.seconds;
+}
+
+// Delete client
+const deleteClientQuery = async (dataID, clientID, storedClients, queryID) => {
+  let clientToEdit = storedClients.filter(client => client.uid == clientID);
+  console.log('client: ', clientToEdit)
+
+  const editedClientQueries = clientToEdit[0].queries.filter(q => getQueryId(q, clientID) !== queryID);
+  console.log('Query: ', editedClientQueries)
+  clientToEdit[0].queries = editedClientQueries;
+
+  console.log(clientToEdit[0], editedClientQueries, queryID);
+  editClient(dataID, clientToEdit[0], storedClients);
+
+}
+
 // Delete client
 const editClient = async (dataID, clientData, storedClients) => {
  const newClientList = storedClients.map(c => c.uid == clientData.uid ? c = clientData : c);
   const userRef = doc(db, userDB, dataID);
+  console.log(storedClients, newClientList)
   await updateDoc(userRef, {
     clients: newClientList
   });
@@ -231,5 +252,6 @@ export {
     logout,
     initWatchUserDb,
     deleteClient,
-    editClient
+    editClient,
+    deleteClientQuery
   };

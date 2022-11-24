@@ -19,6 +19,7 @@ const Confirmation = ({ nextStep, prevStep, values, user, clientId, client }) =>
         let query = Object.fromEntries(filtered);
         console.log(query)
         if (query.queryAddress) {
+            console.log(query)
             query = {
                 queryType: query.queryType,
                 formatted_address: query.queryAddress.formatted_address,
@@ -58,20 +59,28 @@ const Confirmation = ({ nextStep, prevStep, values, user, clientId, client }) =>
         });
     }
 
+    const formatAddressLine = (data) => {
+        console.log(data)
+        const { queryAddress, queryType, radius } = data;
+        const { adr_address : address_html, formatted_address, name, vicinity } = queryAddress;
+        const html = queryType == "house" || queryType == "building" ?
+                `Address: ${formatted_address}`
+            :
+            queryType == 'street' ?
+                `Name: ${name}`
+            :
+            queryType == 'radius' ?
+            `Properties within a ${radius} around ${formatted_address}`
+            :
+            'We are experiencing an error while confirming your search, please try again.';
+            return html;
+    }
+
     return (
         <div>
             <p>Search type: {toTitleCase(values.queryType)}</p>
             <p>{
-                values.queryType == "house" || values.queryType == "building" ?
-                    'Address: ' + values.queryAddress.formatted_address
-                    :
-                    values.queryType == "street" ?
-                        'Street: ' + toTitleCase(values.streetName)
-                        :
-                        values.queryType == 'radius' ?
-                            'Properties within a ' + values.radius + ' around ' + values.formatted_address
-                            :
-                            'We are experiencing an error while confirming your search, please try again.'
+                formatAddressLine(values)
             }</p>
             <div className="d-flex">
                 <button className='btn btn-standard w-50 mt-5' onClick={Previous}>Prev</button>
