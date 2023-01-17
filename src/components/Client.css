@@ -16,6 +16,10 @@
     padding: 8px 10px;
 }
 
+.query {
+    grid-template-columns: 2fr 6fr 4fr 1fr 1fr 1fr;
+}
+
 .client-info {
     width: fit-content;
 }
@@ -41,4 +45,9 @@
 }
 .client-info > .icon-delete:hover {
     color: var(--warning-primary);
+}
+
+.query:hover {
+    box-shadow: 0 .5rem 1rem rgba(0, 0, 0,.15);
+    background-color: var(--primary-blue);
 }

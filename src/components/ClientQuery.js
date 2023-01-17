@@ -2,15 +2,25 @@ import React, { useState } from 'react';
 import ReactTooltip from "react-tooltip";
 import ClientDeleteButton from './ClientDeleteButton';
 
+function formatParams(queryData){
+    const type = queryData.queryType;
+    const formatObj = {
+        house: "formatted_address",
+        building: "formatted_address",
+        street: "formatted_address",
+        radius: "coming soon..."
+    }
+    return queryData[formatObj[type]];
+}
 
 
 function ClientQuery({ data, id, clientID, dataID, clientList }) {
     // console.log(clientList, data)
     const [tooltip, showTooltip] = useState(true);
     const [clients, setClients] = useState(clientList);
-    const [parameters, setParameters] = useState(data.queryType == 'street' ? data.streetName : '');
+    const [parameters, setParameters] = useState(formatParams(data));
     // format query for display
-
+    // formatParams(data);
 
 
     return (

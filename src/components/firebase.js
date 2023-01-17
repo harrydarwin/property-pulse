@@ -89,7 +89,15 @@ const signInWithGoogle = async (fn) => {
   }
 };
 
-const getUserData = async (userUuid) => {
+const getUserData = async (userUuid = null) => {
+  if(!window.localStorage.getItem('pp-47-ui')){
+    window.localStorage.setItem('pp-47-ui', userUuid);
+  }
+
+  if(!userUuid){
+    userUuid = window.localStorage.getItem('pp-47-ui')
+  }
+  console.log('USER MAWWWWFUCKING ID MY G:: ', userUuid);
     const q = query(collection(db, userDB), where("uid", "==", userUuid));
     const docs = await getDocs(q);
     if(docs.docs.length > 0) {
