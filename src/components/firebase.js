@@ -37,7 +37,7 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 const storage = getStorage();
-const userDB = process.env.REACT_APP_USERS_DB;
+const userDB = 'propertyPulseUsersDb47';
 
 // REALTIME UPDATES - to from userDB to currentUser state - MAY NOT NEED
 const initWatchUserDb = (dataID) => {

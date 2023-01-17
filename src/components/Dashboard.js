@@ -16,6 +16,7 @@ function Dashboard({getUser, updateCurrentUser, userData}) {
 
   const navigate = useNavigate();
   const fetchUserName = async () => {
+    console.log(db, userDB, user)
     try {
       const q = query(collection(db, userDB), where("uid", "==", user.uid));
       const doc = getDocs(q);
