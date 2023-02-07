@@ -1,6 +1,4 @@
 import { initializeApp } from "firebase/app";
-import * as functions from 'firebase-functions';
-import * as admin from 'firebase-admin';
 import {
   GoogleAuthProvider,
   getAuth,
@@ -106,6 +104,7 @@ const getUserData = async (userUuid = null) => {
         return docs.docs[0].data();
     } else {
         console.log('Error no - user docs');
+        logout();
     }
 
 }

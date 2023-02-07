@@ -15,11 +15,11 @@ export default function Client({ client, fname, lname, email, phone, address, op
     const [tooltip, showTooltip] = useState(true);
     return (
         <div id={'client-' + id} className='client'>
-            <div className="client-info">{fname}</div>
-            <div className="client-info">{lname}</div>
+            <div className="client-info">{fname} {lname}</div>
             <div className="client-info">{email}</div>
             <div className="client-info">{phone}</div>
             <div className="client-info">{address.addrFormatted}</div>
+            <div className="client-info open-queries m-auto">{queries.length}</div>
 
             <div className="client-info icon icon-add" data-tip data-for={'client-search-' + id} onMouseEnter={() => showTooltip(true)}
                 onMouseLeave={() => {
