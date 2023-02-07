@@ -22,7 +22,7 @@
     "react-tooltip": "^4.2.21",
     "web-vitals": "^2.1.4",
     "@sendgrid/mail": "^7.7.0",
-    "firebase-admin": "^10.0.2",
+    "firebase-admin": "^11.5.0",
     "firebase-functions": "^4.2.0"
   },
   "scripts": {
