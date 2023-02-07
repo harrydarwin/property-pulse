@@ -14,11 +14,11 @@ export default function ClientList(clientList, dataID) {
         const clients = clientList.clientList;
         // Map clientList.current clients into a client component
         return <><div className="table-headings p-4 pl-5">
-            <div className="client-info">First</div>
-            <div className="client-info">Last</div>
+            <div className="client-info">Name</div>
             <div className="client-info">Email</div>
             <div className="client-info">Phone</div>
             <div className="client-info">Address</div>
+            <div className="client-info">Active searches</div>
         </div><div className="client-list p-4">
                 {/* Players list */}
                 {clients.map((client, index) =>

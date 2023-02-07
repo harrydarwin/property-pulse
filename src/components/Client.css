@@ -16,6 +16,12 @@
     padding: 8px 10px;
 }
 
+.client,
+.table-headings {
+    grid-template-columns: 3fr 3fr 2fr 3fr 2fr 1fr 1fr 1fr;
+}
+
+
 .query {
     grid-template-columns: 2fr 6fr 4fr 1fr 1fr 1fr;
 }
@@ -45,6 +51,17 @@
 }
 .client-info > .icon-delete:hover {
     color: var(--warning-primary);
+}
+
+.client-info.open-queries {
+    background-color: var(--primary-blue);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .query:hover {

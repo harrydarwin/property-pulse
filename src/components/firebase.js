@@ -104,6 +104,7 @@ const getUserData = async (userUuid = null) => {
         return docs.docs[0].data();
     } else {
         console.log('Error no - user docs');
+        logout();
     }
 
 }

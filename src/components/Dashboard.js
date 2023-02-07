@@ -28,6 +28,7 @@ function Dashboard({getUser, updateCurrentUser, userData}) {
     } catch (err) {
       console.error(err);
       alert("An error occured while fetching user data");
+
     }
   };
 
