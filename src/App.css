@@ -85,6 +85,10 @@ a:hover {
   border-color: #6c757d;
 }
 
+.min-150 {
+  min-width: 150px;
+}
+
 .selected-input {
   color: #fff;
   background: #8bbabb;

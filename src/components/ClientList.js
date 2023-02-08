@@ -18,7 +18,7 @@ export default function ClientList(clientList, dataID) {
             <div className="client-info">Email</div>
             <div className="client-info">Phone</div>
             <div className="client-info">Address</div>
-            <div className="client-info">Active searches</div>
+            <div className="client-info text-center">Active searches</div>
         </div><div className="client-list p-4">
                 {/* Players list */}
                 {clients.map((client, index) =>

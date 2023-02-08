@@ -23,6 +23,7 @@ const Confirmation = ({ nextStep, prevStep, values, user, clientId, client }) =>
             query = {
                 queryType: query.queryType,
                 formatted_address: query.queryAddress.formatted_address,
+                homeType: query.homeType ? query.homeType : '',
                 name: query.queryAddress.name,
                 vicinity: query.queryAddress.vicinity
             }
@@ -61,24 +62,32 @@ const Confirmation = ({ nextStep, prevStep, values, user, clientId, client }) =>
 
     const formatAddressLine = (data) => {
         console.log(data)
-        const { queryAddress, queryType, radius } = data;
+        const { queryAddress, queryType, homeType, radius } = data;
         const { adr_address : address_html, formatted_address, name, vicinity } = queryAddress;
-        const html = queryType == "house" || queryType == "building" ?
+        const ifHomeType = homeType ? homeType : "N/A";
+        const html =
+            queryType == "addressSearch" ?
                 `Address: ${formatted_address}`
             :
-            queryType == 'street' ?
+            queryType == 'streetSearch' ?
                 `Name: ${name}`
             :
-            queryType == 'radius' ?
+            queryType == 'radiusSearch' ?
             `Properties within a ${radius} around ${formatted_address}`
             :
             'We are experiencing an error while confirming your search, please try again.';
             return html;
     }
 
+    const formatHomeType = (data) => {
+        const { homeType } = data;
+        return toTitleCase(homeType);
+    }
+
     return (
         <div>
             <p>Search type: {toTitleCase(values.queryType)}</p>
+            <p>Home type: {formatHomeType(values)}</p>
             <p>{
                 formatAddressLine(values)
             }</p>

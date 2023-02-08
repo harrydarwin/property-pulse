@@ -21,13 +21,24 @@
     grid-template-columns: 3fr 3fr 2fr 3fr 2fr 1fr 1fr 1fr;
 }
 
-
-.query {
-    grid-template-columns: 2fr 6fr 4fr 1fr 1fr 1fr;
+.table-headings.query-headings {
+    grid-template-columns: 1fr 1fr 3fr 1fr 2fr 1fr 1fr;
+    /* text-align: center; */
 }
 
-.client-info {
+
+.query {
+    grid-template-columns: 1fr 1fr 3fr 1fr 2fr 1fr 1fr;
+}
+
+
+.table-headings.query-headings .client-info:first-of-type {
     width: fit-content;
+}
+
+.table-headings.query-headings .client-info:last-of-type {
+    justify-self: end;
+    padding-right: 5px;
 }
 
 .client-info.icon {

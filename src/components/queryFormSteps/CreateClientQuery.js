@@ -18,11 +18,12 @@ const CreateClientQuery = ({user, clientId, client}) => {
 
     const [step, setStep] = useState(1);
     const [queryType, setQueryType] = useState('');
+    const [homeType, setHomeType] = useState('');
     const [queryAddress, setQueryAddress] = useState('');
     const [streetName, setStreetName] = useState('');
     const [radius, setRadius] = useState('');
 
-    const values = { queryType, queryAddress, streetName, radius }
+    const values = { queryType, homeType, queryAddress, streetName, radius }
 
      // go back to previous step
     const prevStep = () => {
@@ -54,6 +55,7 @@ switch (step) {
       <QueryLocation
         nextStep={nextStep}
         prevStep={prevStep}
+        setHomeType={setHomeType}
         setAddress={setQueryAddress}
         setStreetName={setStreetName}
         setRadius={setRadius} values={values} />

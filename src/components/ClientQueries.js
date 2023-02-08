@@ -52,9 +52,14 @@ export default function ClientQueries(currentUser, clientId, client) {
         return <>
             <div className="card-container-full container card-container container-full p-4 row">
                 <legend className='text-center mb-5'>Remove unwanted property searches</legend>
-                <div className="table-headings p-4 pl-5">
+                <div className="table-headings query-headings p-4 pl-5">
                     <div className="client-info">Search type</div>
-                    <div className="client-info">Search parameters</div>
+                    <div className="client-info text-center">Home type(s)</div>
+                    <div className="client-info">Address</div>
+                    <div className="client-info">Vicinity</div>
+                    <div className="client-info text-center">Email frequency</div>
+                    <div className="client-info text-center">Active</div>
+                    <div className="client-info">Delete</div>
                 </div>
                 <div className="client-list p-4">
                     {queries.map((query, index) =>
