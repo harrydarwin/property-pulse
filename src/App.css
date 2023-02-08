@@ -96,6 +96,17 @@ a:hover {
   outline: none!important;
 }
 
+.input-normal {
+  border: 1px solid #8bbabb;
+  border-color: #8bbabb !important;
+  border-radius: 5px !important;
+}
+
+.input-focused {
+  outline: none;
+  border-color: var(--dark-blue);
+}
+
 .btn-warning {
   color: var(--warning-primary);
   border-color: var(--warning-primary);

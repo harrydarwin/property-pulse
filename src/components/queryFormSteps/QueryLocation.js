@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import $ from 'jquery';
 import LocationSearchInput from '../LocationSearchInput';
+import HomeTypeDropdown from '../homeTypeDropdown/HomeTypeDropdown';
 
 const QueryLocation = ({ nextStep, prevStep, values, setHomeType, setAddress, setUnitNumber, setStreetName, setRadius }) => {
     const regBtn = 'btn btn-standard min-150';
@@ -75,7 +76,7 @@ const QueryLocation = ({ nextStep, prevStep, values, setHomeType, setAddress, se
                     <>
                         <div className='mb-2'>Lets get Radial</div>
                         <form>
-                            <div className="location-search row">
+                            <div className="location-search row mx-0">
                                 <LocationSearchInput classes={'d-flex px-0'}
                                     locationPlaceholder={"Enter an address"}
                                     setAddress={setAddress}
@@ -88,7 +89,8 @@ const QueryLocation = ({ nextStep, prevStep, values, setHomeType, setAddress, se
                         <>
                             <div className='mb-2'>Lets lock this street down!</div>
                             <form>
-                                <div className="location-search row">
+                                <HomeTypeDropdown />
+                                <div className="location-search row mx-0">
                                     <LocationSearchInput classes={'d-flex px-0'}
                                         locationPlaceholder={"Enter a street name"}
                                         setAddress={setAddress}
