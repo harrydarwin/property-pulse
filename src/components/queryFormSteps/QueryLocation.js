@@ -4,12 +4,13 @@ import React, { useState } from 'react';
 import $ from 'jquery';
 import LocationSearchInput from '../LocationSearchInput';
 
-const QueryLocation = ({ nextStep, prevStep, values, setHomeType, setAddress, setStreetName, setRadius }) => {
+const QueryLocation = ({ nextStep, prevStep, values, setHomeType, setAddress, setUnitNumber, setStreetName, setRadius }) => {
     const regBtn = 'btn btn-standard min-150';
     const ActiveBtn = regBtn + ' selected-input';
     const [sType, setSType] = useState(values.queryType);
     const [street, setStreet] = useState(values.streetName);
     const [selectedRadius, setSelectedRadius] = useState(values.radius);
+    const [unit, setUnit] = useState('');
 
 
     const selectInput = (e) => {
@@ -29,6 +30,7 @@ const QueryLocation = ({ nextStep, prevStep, values, setHomeType, setAddress, se
         } else {
             setStreetName(street);
             setRadius(selectedRadius);
+            setUnitNumber(unit);
             nextStep();
         }
     }
@@ -38,9 +40,6 @@ const QueryLocation = ({ nextStep, prevStep, values, setHomeType, setAddress, se
         prevStep();
     }
 
-    const handleChange = e => {
-
-    }
 
     return (
         <div>
@@ -57,9 +56,16 @@ const QueryLocation = ({ nextStep, prevStep, values, setHomeType, setAddress, se
 
                         </div>
                         <div className="location-search row mx-0">
-                            <LocationSearchInput classes={'d-flex px-0'}
-                                locationPlaceholder={"Enter a house address"}
+                            <LocationSearchInput classes={'d-flex px-0 col-md-10'}
+                                locationPlaceholder={"Enter an address"}
                                 setAddress={setAddress}
+                            />
+                            <input
+                                onChange={e => setUnit(e.target.value)}
+                                value={unit}
+                                name='unitNumber'
+                                className="login__textBox mb-0 col-md-2"
+                                placeholder='(Unit)'
                             />
                         </div>
                     </form>
@@ -71,7 +77,7 @@ const QueryLocation = ({ nextStep, prevStep, values, setHomeType, setAddress, se
                         <form>
                             <div className="location-search row">
                                 <LocationSearchInput classes={'d-flex px-0'}
-                                    locationPlaceholder={"Enter a building address or name"}
+                                    locationPlaceholder={"Enter an address"}
                                     setAddress={setAddress}
                                 />
                             </div>

@@ -47,7 +47,14 @@ function ClientQuery({ data, id, clientID, dataID, clientList }) {
         <div id={id} className='query'>
             <div className="client-info">{queryType}</div>
             <div className="client-info text-center">{formatHomeType(data.homeType)}</div>
-            <div className="client-info">{formattedAddress}</div>
+            <div className="client-info">
+                <p className="m-0">
+                    {formattedAddress}
+                </p>
+                <p className="m-0">
+                    {data.unit != '' && data.unit != undefined ? ' Unit: '+data.unit:''}
+                </p>
+            </div>
             <div className="client-info">{data.vicinity}</div>
             <div className="client-info"></div>
             <div className="client-info"></div>

@@ -23,6 +23,7 @@ const Confirmation = ({ nextStep, prevStep, values, user, clientId, client }) =>
             query = {
                 queryType: query.queryType,
                 formatted_address: query.queryAddress.formatted_address,
+                unit: query.unitNumber,
                 homeType: query.homeType ? query.homeType : '',
                 name: query.queryAddress.name,
                 vicinity: query.queryAddress.vicinity
@@ -88,9 +89,12 @@ const Confirmation = ({ nextStep, prevStep, values, user, clientId, client }) =>
         <div>
             <p>Search type: {toTitleCase(values.queryType)}</p>
             <p>Home type: {formatHomeType(values)}</p>
-            <p>{
-                formatAddressLine(values)
-            }</p>
+            <p>
+            {formatAddressLine(values)}
+            </p>
+            <p>
+            {values.unitNumber != '' ? 'Unit: '+values.unitNumber:''}
+            </p>
             <div className="d-flex">
                 <button className='btn btn-standard w-50 mt-5' onClick={Previous}>Prev</button>
                 <button className='btn btn-standard w-50 mt-5' onClick={Continue}>Create search</button>
