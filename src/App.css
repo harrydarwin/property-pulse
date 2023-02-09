@@ -104,7 +104,8 @@ a:hover {
 
 .input-focused {
   outline: none;
-  border-color: var(--dark-blue);
+  border-color: #14213d !important;
+  box-shadow: none !important;
 }
 
 .btn-warning {
@@ -155,7 +156,7 @@ a:hover {
 .card-container {
   position: relative;
   margin: auto;
-  overflow: hidden;
+  /* overflow: hidden; */
   width: 520px;
   height: 350px;
   background: #fff;

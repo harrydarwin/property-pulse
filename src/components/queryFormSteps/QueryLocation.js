@@ -89,7 +89,11 @@ const QueryLocation = ({ nextStep, prevStep, values, setHomeType, setAddress, se
                         <>
                             <div className='mb-2'>Lets lock this street down!</div>
                             <form>
-                                <HomeTypeDropdown />
+                                <div className="homeTypeDropDown row mb-4">
+                                    <div className="col-md-4">
+                                        <HomeTypeDropdown />
+                                    </div>
+                                </div>
                                 <div className="location-search row mx-0">
                                     <LocationSearchInput classes={'d-flex px-0'}
                                         locationPlaceholder={"Enter a street name"}
