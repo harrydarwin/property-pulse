@@ -16,7 +16,7 @@ import { editClient } from './firebase';
 
 export default function ClientSearchParams({ currentUser, clientId, client }) {
 
-
+console.log(currentUser)
     // let cl;
     // currentUser.clients.forEach(client => client.uid == clientId ? cl = client : null)
     const navigate = useNavigate();

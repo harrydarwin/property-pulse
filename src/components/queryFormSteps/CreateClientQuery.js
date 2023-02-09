@@ -12,8 +12,6 @@ const CreateClientQuery = ({user, clientId, client}) => {
   if(!currentClient || currentClient == undefined) {
     client = user.clients.filter(client => client.uid == clientId)[0];
 
-    console.log(client)
-
   }
 
     const [step, setStep] = useState(1),
