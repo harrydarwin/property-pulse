@@ -90,7 +90,7 @@ const QueryLocation = ({ nextStep, prevStep, values, setHomeType, setAddress, se
                             <div className='mb-2'>Lets lock this street down!</div>
                             <form>
                                 <div className="homeTypeDropDown row mb-4">
-                                    <div className="col-md-4">
+                                    <div className="">
                                         <HomeTypeDropdown />
                                     </div>
                                 </div>
